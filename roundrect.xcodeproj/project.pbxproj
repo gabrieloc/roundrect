@@ -14,6 +14,10 @@
 		B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */; };
 		B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */; };
 		B2E9C51C21E962A500FB1B08 /* recorded in Resources */ = {isa = PBXBuildFile; fileRef = B2E9C51B21E962A500FB1B08 /* recorded */; };
+		B2E9C51E21E9635C00FB1B08 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C51D21E9635C00FB1B08 /* ButtonStyle.swift */; };
+		B2E9C52021E963D000FB1B08 /* ButtonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */; };
+		B2E9C52221E9642D00FB1B08 /* ButtonStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */; };
+		B2E9C52421E9645F00FB1B08 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52321E9645F00FB1B08 /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +41,10 @@
 		B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationTests.swift; sourceTree = "<group>"; };
 		B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		B2E9C51B21E962A500FB1B08 /* recorded */ = {isa = PBXFileReference; lastKnownFileType = folder; path = recorded; sourceTree = "<group>"; };
+		B2E9C51D21E9635C00FB1B08 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTheme.swift; sourceTree = "<group>"; };
+		B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyleTests.swift; sourceTree = "<group>"; };
+		B2E9C52321E9645F00FB1B08 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,9 @@
 			isa = PBXGroup;
 			children = (
 				B2D841E721E95FC70044ED5A /* ImageGeneration.swift */,
+				B2E9C51D21E9635C00FB1B08 /* ButtonStyle.swift */,
+				B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */,
+				B2E9C52321E9645F00FB1B08 /* Util.swift */,
 				B2D841BD21E95EB10044ED5A /* roundrect.h */,
 				B2D841BE21E95EB10044ED5A /* Info.plist */,
 			);
@@ -92,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */,
+				B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */,
 				B2D841C821E95EB20044ED5A /* roundrectTests.swift */,
 				B2D841CA21E95EB20044ED5A /* Info.plist */,
 				B2E9C51B21E962A500FB1B08 /* recorded */,
@@ -240,6 +252,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D841E821E95FC70044ED5A /* ImageGeneration.swift in Sources */,
+				B2E9C52421E9645F00FB1B08 /* Util.swift in Sources */,
+				B2E9C51E21E9635C00FB1B08 /* ButtonStyle.swift in Sources */,
+				B2E9C52021E963D000FB1B08 /* ButtonTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D841C921E95EB20044ED5A /* roundrectTests.swift in Sources */,
+				B2E9C52221E9642D00FB1B08 /* ButtonStyleTests.swift in Sources */,
 				B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

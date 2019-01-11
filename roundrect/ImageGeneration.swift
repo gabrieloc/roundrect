@@ -160,36 +160,3 @@ extension UIBezierPath {
     }
   }
 }
-
-extension UIEdgeInsets {
-  
-  init(x: CGFloat, y: CGFloat) {
-    self.init(top: y, left: x, bottom: y, right: x)
-  }
-  
-  init(equalInsets: CGFloat) {
-    self.init(top: equalInsets, left: equalInsets, bottom: equalInsets, right: equalInsets)
-  }
-  
-  static var one: UIEdgeInsets {
-    return UIEdgeInsets(x: 1, y: 1)
-  }
-  
-  static func *(_ lhs: UIEdgeInsets, _ rhs: CGFloat) -> UIEdgeInsets {
-    return UIEdgeInsets(
-      top: lhs.top * rhs,
-      left: lhs.left * rhs,
-      bottom: lhs.bottom * rhs,
-      right: lhs.right * rhs
-    )
-  }
-}
-
-extension CGSize {
-  static func +(_ lhs: CGSize, _ rhs: CGSize) -> CGSize {
-    return CGSize(
-      width: lhs.width + rhs.width,
-      height: lhs.height + rhs.height
-    )
-  }
-}
