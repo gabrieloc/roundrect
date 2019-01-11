@@ -1,3 +1,0 @@
-[submodule "ios-snapshot-test-case"]
-	path = ios-snapshot-test-case
-	url = https://github.com/uber/ios-snapshot-test-case.git

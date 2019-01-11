@@ -10,9 +10,10 @@
 		B2D841C421E95EB20044ED5A /* roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* roundrect.framework */; };
 		B2D841C921E95EB20044ED5A /* roundrectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841C821E95EB20044ED5A /* roundrectTests.swift */; };
 		B2D841CB21E95EB20044ED5A /* roundrect.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D841BD21E95EB10044ED5A /* roundrect.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2D841E621E95FAF0044ED5A /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841DE21E95F870044ED5A /* FBSnapshotTestCase.framework */; };
 		B2D841E821E95FC70044ED5A /* ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E721E95FC70044ED5A /* ImageGeneration.swift */; };
 		B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */; };
+		B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */; };
+		B2E9C51C21E962A500FB1B08 /* recorded in Resources */ = {isa = PBXBuildFile; fileRef = B2E9C51B21E962A500FB1B08 /* recorded */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,34 +24,6 @@
 			remoteGlobalIDString = B2D841B921E95EB10044ED5A;
 			remoteInfo = roundrect;
 		};
-		B2D841DD21E95F870044ED5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B31987F01AB782D000B0A900;
-			remoteInfo = "FBSnapshotTestCase iOS";
-		};
-		B2D841DF21E95F870044ED5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = B31987FB1AB782D100B0A900;
-			remoteInfo = "FBSnapshotTestCase iOS Tests";
-		};
-		B2D841E121E95F870044ED5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8271377A1C63AB6F00354E42;
-			remoteInfo = "FBSnapshotTestCase tvOS";
-		};
-		B2D841E321E95F870044ED5A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 827137831C63AB7000354E42;
-			remoteInfo = "FBSnapshotTestCase tvOS Tests";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -60,9 +33,10 @@
 		B2D841C321E95EB20044ED5A /* roundrectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = roundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D841C821E95EB20044ED5A /* roundrectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roundrectTests.swift; sourceTree = "<group>"; };
 		B2D841CA21E95EB20044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FBSnapshotTestCase.xcodeproj; path = "../ios-snapshot-test-case/FBSnapshotTestCase.xcodeproj"; sourceTree = "<group>"; };
 		B2D841E721E95FC70044ED5A /* ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneration.swift; sourceTree = "<group>"; };
 		B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationTests.swift; sourceTree = "<group>"; };
+		B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
+		B2E9C51B21E962A500FB1B08 /* recorded */ = {isa = PBXFileReference; lastKnownFileType = folder; path = recorded; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2D841E621E95FAF0044ED5A /* FBSnapshotTestCase.framework in Frameworks */,
+				B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */,
 				B2D841C421E95EB20044ED5A /* roundrect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +64,6 @@
 			children = (
 				B2D841BC21E95EB10044ED5A /* roundrect */,
 				B2D841C721E95EB20044ED5A /* roundrectTests */,
-				B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */,
 				B2D841BB21E95EB10044ED5A /* Products */,
 				B2D841E521E95FAF0044ED5A /* Frameworks */,
 			);
@@ -121,24 +94,15 @@
 				B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */,
 				B2D841C821E95EB20044ED5A /* roundrectTests.swift */,
 				B2D841CA21E95EB20044ED5A /* Info.plist */,
+				B2E9C51B21E962A500FB1B08 /* recorded */,
 			);
 			path = roundrectTests;
-			sourceTree = "<group>";
-		};
-		B2D841D721E95F860044ED5A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B2D841DE21E95F870044ED5A /* FBSnapshotTestCase.framework */,
-				B2D841E021E95F870044ED5A /* FBSnapshotTestCase iOS Tests.xctest */,
-				B2D841E221E95F870044ED5A /* FBSnapshotTestCase.framework */,
-				B2D841E421E95F870044ED5A /* FBSnapshotTestCase tvOS Tests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		B2D841E521E95FAF0044ED5A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -179,6 +143,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2D841D121E95EB20044ED5A /* Build configuration list for PBXNativeTarget "roundrectTests" */;
 			buildPhases = (
+				B2E9C51621E961B900FB1B08 /* ShellScript */,
 				B2D841BF21E95EB20044ED5A /* Sources */,
 				B2D841C021E95EB20044ED5A /* Frameworks */,
 				B2D841C121E95EB20044ED5A /* Resources */,
@@ -222,12 +187,6 @@
 			mainGroup = B2D841B021E95EB10044ED5A;
 			productRefGroup = B2D841BB21E95EB10044ED5A /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = B2D841D721E95F860044ED5A /* Products */;
-					ProjectRef = B2D841D621E95F860044ED5A /* FBSnapshotTestCase.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B2D841B921E95EB10044ED5A /* roundrect */,
@@ -235,37 +194,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		B2D841DE21E95F870044ED5A /* FBSnapshotTestCase.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FBSnapshotTestCase.framework;
-			remoteRef = B2D841DD21E95F870044ED5A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B2D841E021E95F870044ED5A /* FBSnapshotTestCase iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "FBSnapshotTestCase iOS Tests.xctest";
-			remoteRef = B2D841DF21E95F870044ED5A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B2D841E221E95F870044ED5A /* FBSnapshotTestCase.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FBSnapshotTestCase.framework;
-			remoteRef = B2D841E121E95F870044ED5A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B2D841E421E95F870044ED5A /* FBSnapshotTestCase tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "FBSnapshotTestCase tvOS Tests.xctest";
-			remoteRef = B2D841E321E95F870044ED5A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B2D841B821E95EB10044ED5A /* Resources */ = {
@@ -279,10 +207,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2E9C51C21E962A500FB1B08 /* recorded in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B2E9C51621E961B900FB1B08 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/FBSnapshotTestCase.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B2D841B621E95EB10044ED5A /* Sources */ = {
@@ -491,6 +441,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/roundrect/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = roundrectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,6 +464,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/roundrect/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = roundrectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

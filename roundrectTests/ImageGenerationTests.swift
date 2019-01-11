@@ -7,9 +7,10 @@
 //
 
 import FBSnapshotTestCase
+@testable import roundrect
 
 class ImageGenerationTests: FBSnapshotTestCase {
-  
+
   func testViewRasterization() {
     let view = UILabel()
     view.text = "👹"
