@@ -9,15 +9,16 @@
 import UIKit
 
 extension UIButton {  
-  enum Size {
+  enum Size: String, CaseIterable {
     case small, big
   }
   
-  enum ActionType {
+  enum ActionType: String, CaseIterable {
     case primary, dismiss
   }
   
   enum Style: Equatable {
+    
     case gradient(from: UIColor, to: UIColor, cornerRadius: CGFloat)
     case bordered(cornerRadius: CGFloat)
     case filled(cornerRadius: CGFloat)
