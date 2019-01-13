@@ -1,6 +1,6 @@
 # roundrect
 
-A library for programmatically generating image assets and styling `UIButton` with generated assets.
+Conveniences for programmatically generating image assets and styling UIButton.
 
 ## Creating Images
 The conveniences in `ImageGeneration.swift`  allow images to be generated from a view, or given various style properties like fill, stroke, corner radius, etc. For example, to create a 3px/3px image with a 1px blue stroke and a single red fill:
