@@ -8,13 +8,18 @@
 
 import FBSnapshotTestCase
 
-class SampleSheetTests: FBSnapshotTestCase {  
+class SampleSheetTests: FBSnapshotTestCase {
+  override func setUp() {
+    super.setUp()
+    recordMode = true
+  }
+  
   func testGenerateSampleSheet() {
     let canvas = CGRect(
       origin: .zero,
       size: CGSize(
-        width: 512,
-        height: 1024
+        width: 1024,
+        height: 512
       )
     )
     let sampleSheet = SampleSheet(frame: canvas)

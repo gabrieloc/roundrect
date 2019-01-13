@@ -21,25 +21,25 @@ class SampleSheet: UIView {
     let themes = UIButton.Theme.allCases
     let states = ButtonStyleTests.State.allCases
     
-    let sheetInset = UIEdgeInsets(
-      top: 88,
-      left: 64,
-      bottom: 64,
-      right: 64
-    )
+    let sheetInset = UIEdgeInsets(equalInsets: 32)
     
     let sheetFrame = frame.inset(by: sheetInset)
+    
+    let sectionMargin = (x: CGFloat(16), y: CGFloat(16))
 
     func sectionRect(for section: Int) -> CGRect {
-      let h = sheetFrame.height / 4
+      let (row, col) = (
+        CGFloat(floor(CGFloat(section) / 2)),
+        CGFloat(section % 2)
+      )
       return CGRect(
         origin: CGPoint(
-          x: sheetFrame.minX,
-          y: innerMargin * 2 + sheetFrame.minY + CGFloat(section) * h
+          x: sheetFrame.minX + (sheetFrame.width / 2 + sectionMargin.x) * col,
+          y: sheetFrame.minY + (sheetFrame.height / 2 + sectionMargin.y) * row
         ),
         size: CGSize(
-          width: sheetFrame.width,
-          height: h - innerMargin * 2
+          width: (sheetFrame.width - sectionMargin.x) / 2,
+          height: (sheetFrame.height - sectionMargin.y) / 2
         )
       )
     }
