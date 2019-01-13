@@ -25,5 +25,5 @@ let button = UIButton(
 This will yield a button with a tintable fill and a corner radius of 8.
 
 ## Code coverage
-Image generation and button styling tests rely on [FBSnapshotTestCase](https://github.com/uber/ios-snapshot-test-case), which is linked using Carthage. To see what's tested, view the reference images in `roundrectTests/recorded/`. `SampleSheetTests` generates an asset displaying every combination of style and theme, allowing 
+Image generation and button styling tests rely on [FBSnapshotTestCase](https://github.com/uber/ios-snapshot-test-case), which is linked using Carthage. To see what's tested, view the reference images in `roundrectTests/recorded/`. `SampleSheetTests` generates an asset displaying every combination of style and theme, providing a quick preview of what's available:
 ![roundrect](sample.png)
