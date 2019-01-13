@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		B2D841C421E95EB20044ED5A /* roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* roundrect.framework */; };
-		B2D841C921E95EB20044ED5A /* roundrectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841C821E95EB20044ED5A /* roundrectTests.swift */; };
 		B2D841CB21E95EB20044ED5A /* roundrect.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D841BD21E95EB10044ED5A /* roundrect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2D841E821E95FC70044ED5A /* ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E721E95FC70044ED5A /* ImageGeneration.swift */; };
 		B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */; };
@@ -18,6 +17,8 @@
 		B2E9C52021E963D000FB1B08 /* ButtonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */; };
 		B2E9C52221E9642D00FB1B08 /* ButtonStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */; };
 		B2E9C52421E9645F00FB1B08 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52321E9645F00FB1B08 /* Util.swift */; };
+		B2E9C52621EAA0BB00FB1B08 /* SampleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52521EAA0BB00FB1B08 /* SampleSheet.swift */; };
+		B2E9C52821EAA1FF00FB1B08 /* SampleSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52721EAA1FF00FB1B08 /* SampleSheetTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +36,6 @@
 		B2D841BD21E95EB10044ED5A /* roundrect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = roundrect.h; sourceTree = "<group>"; };
 		B2D841BE21E95EB10044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2D841C321E95EB20044ED5A /* roundrectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = roundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2D841C821E95EB20044ED5A /* roundrectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = roundrectTests.swift; sourceTree = "<group>"; };
 		B2D841CA21E95EB20044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2D841E721E95FC70044ED5A /* ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneration.swift; sourceTree = "<group>"; };
 		B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationTests.swift; sourceTree = "<group>"; };
@@ -45,6 +45,8 @@
 		B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTheme.swift; sourceTree = "<group>"; };
 		B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyleTests.swift; sourceTree = "<group>"; };
 		B2E9C52321E9645F00FB1B08 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		B2E9C52521EAA0BB00FB1B08 /* SampleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSheet.swift; sourceTree = "<group>"; };
+		B2E9C52721EAA1FF00FB1B08 /* SampleSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSheetTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +106,8 @@
 			children = (
 				B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */,
 				B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */,
-				B2D841C821E95EB20044ED5A /* roundrectTests.swift */,
+				B2E9C52721EAA1FF00FB1B08 /* SampleSheetTests.swift */,
+				B2E9C52521EAA0BB00FB1B08 /* SampleSheet.swift */,
 				B2D841CA21E95EB20044ED5A /* Info.plist */,
 				B2E9C51B21E962A500FB1B08 /* recorded */,
 			);
@@ -262,9 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2D841C921E95EB20044ED5A /* roundrectTests.swift in Sources */,
+				B2E9C52821EAA1FF00FB1B08 /* SampleSheetTests.swift in Sources */,
 				B2E9C52221E9642D00FB1B08 /* ButtonStyleTests.swift in Sources */,
 				B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */,
+				B2E9C52621EAA0BB00FB1B08 /* SampleSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

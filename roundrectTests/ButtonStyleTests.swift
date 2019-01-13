@@ -10,20 +10,21 @@ import FBSnapshotTestCase
 @testable import roundrect
 
 class ButtonStyleTests: FBSnapshotTestCase {
-  enum State: String, CaseIterable {
-    case normal, disabled, highlighted
+  
+  override func setUp() {
+    super.setUp()
+    recordMode = false
   }
   
+  enum State: String, CaseIterable {
+    case normal, highlighted, disabled
+  }
+
   func testAllCombinations() {
+    let styles = UIButton.Style.allValues(cornerRadius: 10)
     UIButton.Size.allCases.forEach { size in
       UIButton.Theme.allCases.forEach { theme in
         State.allCases.forEach { state in
-          let styles: [UIButton.Style] = [
-            .filled(cornerRadius: 10),
-            .bordered(cornerRadius: 10),
-            .gradient(from: .red, to: .blue, cornerRadius: 10),
-            .titleOnly
-          ]
           styles.forEach { style in
             verifyStyle(
               style,
@@ -72,6 +73,19 @@ extension UIButton.Style: RawRepresentable {
     return nil
   }
   
+  public var title: String {
+    switch self {
+    case .gradient:
+      return "Gradient"
+    case .bordered:
+      return "Bordered"
+    case .filled:
+      return "Filled"
+    case .titleOnly:
+      return "Titled"
+    }
+  }
+  
   public var rawValue: String {
     switch self {
     case .gradient(let from, let to, let cornerRadius):
@@ -83,5 +97,14 @@ extension UIButton.Style: RawRepresentable {
     case .titleOnly:
       return "titled"
     }
+  }
+  
+  static func allValues(cornerRadius: CGFloat) -> [UIButton.Style] {
+    return [
+      .filled(cornerRadius: cornerRadius),
+      .bordered(cornerRadius: cornerRadius),
+      .gradient(from: .red, to: .blue, cornerRadius: cornerRadius),
+      .titleOnly
+    ]
   }
 }

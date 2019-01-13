@@ -87,14 +87,18 @@ extension UIButton {
     
     func titleColor(for theme: Theme, state: UIControl.State) -> UIColor? {
       let color: UIColor? = {
-        if case Style.gradient = self {
-          return .white
-        } else if state == .selected {
-          return theme.inverse.foregroundColor
-        } else if theme == .light && self == .titleOnly {
-          return nil
+        if theme == .extraLight || state == .disabled {
+          return theme.foregroundColor
         }
-        return theme.foregroundColor
+        
+        switch self {
+        case .titleOnly:
+          return theme == .light ? nil : .white
+        case .gradient, .filled:
+          return .white
+        case .bordered:
+          return theme.foregroundColor
+        }
       }()
       let dim = state == .disabled
       return color?.withAlphaComponent(dim ? 0.4 : 1)
@@ -157,12 +161,20 @@ extension UIButton {
     )
     setBackgroundImage(highlightedImage, for: .highlighted)
     
-    let disabledStyle = Style.filled(cornerRadius: 10)
-    let disabledImage = disabledStyle.roundedButtonBackground(
-      for: theme,
-      dim: true
-    )
-    setBackgroundImage(disabledImage, for: .disabled)
+    switch style {
+      case .bordered(let cornerRadius),
+           .filled(let cornerRadius),
+           .gradient(_, _, let cornerRadius):
+        let disabledStyle = Style.filled(cornerRadius: cornerRadius)
+        let disabledImage = disabledStyle.roundedButtonBackground(
+          for: theme,
+          dim: true
+        )
+        setBackgroundImage(disabledImage, for: .disabled)
+        contentEdgeInsets = UIEdgeInsets(x: cornerRadius, y: verticalInset)
+    default:
+      break
+    }
     
     setTitleColor(style.titleColor(for: theme, state: .normal), for: .normal)
     setTitleColor(style.titleColor(for: theme, state: .selected), for: .selected)
@@ -171,7 +183,5 @@ extension UIButton {
     contentHorizontalAlignment = .center
     titleLabel?.adjustsFontSizeToFitWidth = true
     contentVerticalAlignment = .center
-    
-    contentEdgeInsets = UIEdgeInsets(x: 24, y: verticalInset)
   }
 }
