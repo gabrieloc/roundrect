@@ -9,15 +9,15 @@
 import UIKit
 
 extension UIButton {  
-  enum Size: String, CaseIterable {
+  public enum Size: String, CaseIterable {
     case small, big
   }
   
-  enum ActionType: String, CaseIterable {
+  public enum ActionType: String, CaseIterable {
     case primary, dismiss
   }
   
-  enum Style: Equatable {
+  public enum Style: Equatable {
     
     case gradient(from: UIColor, to: UIColor, cornerRadius: CGFloat)
     case bordered(cornerRadius: CGFloat)
@@ -115,7 +115,7 @@ extension UIButton {
       }
     }
     
-    static func ==(_ lhs: Style, _ rhs: Style) -> Bool {
+    public static func ==(_ lhs: Style, _ rhs: Style) -> Bool {
       switch (lhs, rhs){
       case (.gradient(let lhsColors), .gradient(let rhsColors)):
         return lhsColors == rhsColors
@@ -129,13 +129,13 @@ extension UIButton {
     }
   }
   
-  convenience init(style: Style, size: Size = .big, theme: Theme? = nil, type: UIButton.ButtonType = .system) {
+  public convenience init(style: Style, size: Size = .big, theme: Theme? = nil, type: UIButton.ButtonType = .system) {
     self.init(type: type)
     
     setStyle(style, size: size, theme: theme)
   }
   
-  func setStyle(_ style: Style, size: Size = .big, theme t: Theme? = nil) {
+  public func setStyle(_ style: Style, size: Size = .big, theme t: Theme? = nil) {
     
     let theme = t ?? style.defaultTheme
     

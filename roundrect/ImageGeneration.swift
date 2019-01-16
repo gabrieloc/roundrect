@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-  convenience init(view: UIView) {
+  public convenience init(view: UIView) {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
     view.layer.render(in: UIGraphicsGetCurrentContext()!)
     let image = UIGraphicsGetImageFromCurrentImageContext()
@@ -17,7 +17,7 @@ extension UIImage {
     self.init(cgImage: image!.cgImage!)
   }
   
-  static func imageWithLayer(_ layer: CALayer) -> UIImage? {
+  public static func imageWithLayer(_ layer: CALayer) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(layer.bounds.size, layer.isOpaque, 0.0)
     guard let context =  UIGraphicsGetCurrentContext() else {
       return nil
@@ -28,7 +28,7 @@ extension UIImage {
     return img
   }
   
-  convenience init?(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0, insets: UIEdgeInsets? = nil) {
+  public convenience init?(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0, insets: UIEdgeInsets? = nil) {
     let path = UIBezierPath(
       fill: fill,
       stroke: stroke,
@@ -71,7 +71,7 @@ extension UIImage {
     )
   }
   
-  static func resizableImage(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0.0, insets: UIEdgeInsets? = nil, alpha: CGFloat = 1) -> UIImage? {
+  public static func resizableImage(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0.0, insets: UIEdgeInsets? = nil, alpha: CGFloat = 1) -> UIImage? {
     let insets = insets ?? UIEdgeInsets(x: cornerRadius, y: cornerRadius)
     guard let image = UIImage(
       fill: fill,
@@ -85,7 +85,7 @@ extension UIImage {
     return image.withAlpha(alpha).resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
   }
   
-  func withAlpha(_ alpha: CGFloat) -> UIImage {
+  public func withAlpha(_ alpha: CGFloat) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(
       size,
       false,
@@ -101,11 +101,11 @@ extension UIImage {
     return newImage!
   }
   
-  var aspectRatio: CGFloat {
+  public var aspectRatio: CGFloat {
     return size.width / size.height
   }
   
-  static func gradientImage(colors: [UIColor], cornerRadius: CGFloat = 0, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {
+  public static func gradientImage(colors: [UIColor], cornerRadius: CGFloat = 0, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {
     let gradient = CAGradientLayer()
     gradient.frame = CGRect(
       origin: .zero,
@@ -123,7 +123,7 @@ extension UIImage {
 }
 
 extension UIBezierPath {
-  convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, cornerRadius: CGFloat, insets: UIEdgeInsets?) {
+  public convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, cornerRadius: CGFloat, insets: UIEdgeInsets?) {
     let size = CGSize(
       width: 1 + cornerRadius * 2,
       height: 1 + cornerRadius * 2
