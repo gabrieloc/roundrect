@@ -10,6 +10,11 @@ import FBSnapshotTestCase
 @testable import roundrect
 
 class ImageGenerationTests: FBSnapshotTestCase {
+  
+  override func setUp() {
+    super.setUp()
+    recordMode = false
+  }
 
   func testViewRasterization() {
     let view = UILabel()
@@ -17,7 +22,7 @@ class ImageGenerationTests: FBSnapshotTestCase {
     view.isOpaque = false
     view.sizeToFit()
     let image = UIImage(view: view)
-    verifyImage(image, size: view.frame.size)
+    verifyImage(image)
   }
   
   func testFilledImage() {
@@ -56,19 +61,26 @@ class ImageGenerationTests: FBSnapshotTestCase {
         color: .blue,
         width: 10
       )
-      )!
+    )!
     verifyImage(image)
   }
   
   func testRoundedImage() {
     let image = UIImage(
       fill: .blue,
+      cornerRadius: 10
+    )!
+    verifyImage(image)
+  }
+  
+  func testRoundedStrokedImage() {
+    let image = UIImage(
+      fill: .blue,
       stroke: (
         color: .red,
-        width: 10
+        width: 1
       ),
-      cornerRadius: 10,
-      insets: nil
+      cornerRadius: 10
       )!
     verifyImage(image)
   }
@@ -94,11 +106,11 @@ class ImageGenerationTests: FBSnapshotTestCase {
     verifyImage(image)
   }
   
-  func verifyImage(_ image: UIImage, size: CGSize = CGSize(width: 100, height: 100)) {
+  func verifyImage(_ image: UIImage) {
     let imageView = UIImageView(image: image)
     imageView.frame = CGRect(
       origin: .zero,
-      size: size
+      size: image.size
     )
     FBSnapshotVerifyView(imageView)
   }

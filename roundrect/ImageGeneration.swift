@@ -28,12 +28,11 @@ extension UIImage {
     return img
   }
   
-  public convenience init?(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0, insets: UIEdgeInsets? = nil) {
+  public convenience init?(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0) {
     let path = UIBezierPath(
       fill: fill,
       stroke: stroke,
-      cornerRadius: cornerRadius,
-      insets: insets
+      cornerRadius: cornerRadius
     )
     let strokeWidth = stroke?.width ?? 0
     path.lineWidth = strokeWidth
@@ -76,13 +75,14 @@ extension UIImage {
     guard let image = UIImage(
       fill: fill,
       stroke: stroke,
-      cornerRadius: cornerRadius,
-      insets: insets
+      cornerRadius: cornerRadius
       ) else {
         return nil
     }
-    let capInsets = UIEdgeInsets(x: insets.left, y: insets.top)
-    return image.withAlpha(alpha).resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
+    return image.withAlpha(alpha).resizableImage(
+      withCapInsets: insets,
+      resizingMode: .stretch
+    )
   }
   
   public func withAlpha(_ alpha: CGFloat) -> UIImage {
@@ -123,30 +123,25 @@ extension UIImage {
 }
 
 extension UIBezierPath {
-  public convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, cornerRadius: CGFloat, insets: UIEdgeInsets?) {
+  public convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, cornerRadius: CGFloat) {
+
+    let strokeWidth = stroke?.width ?? 0
     let size = CGSize(
       width: 1 + cornerRadius * 2,
       height: 1 + cornerRadius * 2
     )
-    
-    let insets = insets ?? UIEdgeInsets(
-      x: cornerRadius,
-      y: cornerRadius
-    )
-    
-    let strokeWidth = stroke?.width ?? 0
     
     let rect = CGRect(
       origin: .zero,
       size: size
       )
       .insetBy(
-        dx: -insets.left - strokeWidth * 0.5,
-        dy: -insets.top - strokeWidth * 0.5
+        dx: -strokeWidth * 0.5,
+        dy: -strokeWidth * 0.5
       )
       .offsetBy(
-        dx: insets.left + strokeWidth,
-        dy: insets.top + strokeWidth
+        dx: strokeWidth,
+        dy: strokeWidth
     )
     if cornerRadius > 0 {
       self.init(

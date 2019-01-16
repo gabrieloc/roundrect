@@ -11,7 +11,7 @@ import FBSnapshotTestCase
 class SampleSheetTests: FBSnapshotTestCase {
   override func setUp() {
     super.setUp()
-    recordMode = true
+    recordMode = false
   }
   
   func testGenerateSampleSheet() {
