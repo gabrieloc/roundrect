@@ -45,7 +45,7 @@ class SampleSheet: UIView {
     }
     
     styles.forEach { style in
-      let section = styles.index(of: style)!
+      let section = styles.firstIndex(of: style)!
       let rect = sectionRect(for: section)
       
       let header = UILabel(
@@ -63,7 +63,7 @@ class SampleSheet: UIView {
       
       themes.forEach { theme in
         let columnWidth = rect.width / CGFloat(themes.count)
-        let ti: CGFloat = CGFloat(themes.index(of: theme)!)
+        let ti: CGFloat = CGFloat(themes.firstIndex(of: theme)!)
         let gutter: CGFloat = innerMargin * 0.5
         let themeFrame = CGRect(
           origin: CGPoint(
@@ -104,7 +104,7 @@ class SampleSheet: UIView {
           let stateFrame = CGRect(
             origin: CGPoint(
               x: themeFrame.minX + insetX,
-              y: sectionInset + themeFrame.minY + stateHeight * CGFloat(states.index(of: state)!)
+              y: sectionInset + themeFrame.minY + stateHeight * CGFloat(states.firstIndex(of: state)!)
             ),
             size: CGSize(
               width: themeFrame.width - insetX * 2,
