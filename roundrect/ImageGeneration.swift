@@ -142,13 +142,6 @@ extension UIImage {
         height: insets.top + insets.bottom + 50
       )
     )
-    let maskLayer = CAShapeLayer()
-    maskLayer.path = UIBezierPath(
-      roundedRect: rect,
-      byRoundingCorners: rounding?.corners ?? .allCorners,
-      cornerRadii: rounding?.radii ?? .zero
-    ).cgPath
-    maskLayer.frame = rect
 
     let gradient = CAGradientLayer()
     gradient.frame = rect
@@ -156,7 +149,16 @@ extension UIImage {
     gradient.endPoint = stops.end
     gradient.colors = colors.map { $0.cgColor }
     
-    gradient.mask = maskLayer
+    if let rounding = rounding {
+      let maskLayer = CAShapeLayer()
+      maskLayer.path = UIBezierPath(
+        roundedRect: rect,
+        byRoundingCorners: rounding.corners,
+        cornerRadii: rounding.radii
+        ).cgPath
+      maskLayer.frame = rect
+      gradient.mask = maskLayer
+    }
     
     return UIImage.imageWithLayer(gradient)?.resizableImage(
       withCapInsets: insets,
