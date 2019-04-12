@@ -8,6 +8,36 @@
 
 import UIKit
 
+public enum Rounding: Equatable {
+  case all(CGFloat)
+  case some(corners: UIRectCorner, radii: CGSize)
+  
+  var corners: UIRectCorner {
+    switch self {
+    case .all:
+      return .allCorners
+    case .some(let corners, _):
+      return corners
+    }
+  }
+  
+  var radii: CGSize {
+    switch self {
+    case .all(let value):
+      return CGSize(width: value, height: value)
+    case .some(_, let radii):
+      return radii
+    }
+  }
+  
+  var insets: UIEdgeInsets {
+    return UIEdgeInsets(
+      x: radii.width,
+      y: radii.height
+    )
+  }
+}
+
 extension UIImage {
   public convenience init(view: UIView) {
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.isOpaque, 0.0)
@@ -28,11 +58,11 @@ extension UIImage {
     return img
   }
   
-  public convenience init?(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0) {
+  public convenience init?(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, rounding: Rounding? = nil) {
     let path = UIBezierPath(
       fill: fill,
       stroke: stroke,
-      cornerRadius: cornerRadius
+      rounding: rounding
     )
     let strokeWidth = stroke?.width ?? 0
     path.lineWidth = strokeWidth
@@ -70,17 +100,16 @@ extension UIImage {
     )
   }
   
-  public static func resizableImage(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, cornerRadius: CGFloat = 0.0, insets: UIEdgeInsets? = nil, alpha: CGFloat = 1) -> UIImage? {
-    let insets = insets ?? UIEdgeInsets(x: cornerRadius, y: cornerRadius)
+  public static func resizableImage(fill: UIColor, stroke: (color: UIColor, width: CGFloat)? = nil, rounding: Rounding? = nil, insets: UIEdgeInsets? = nil, alpha: CGFloat = 1) -> UIImage? {
     guard let image = UIImage(
       fill: fill,
       stroke: stroke,
-      cornerRadius: cornerRadius
+      rounding: rounding
       ) else {
         return nil
     }
     return image.withAlpha(alpha).resizableImage(
-      withCapInsets: insets,
+      withCapInsets: insets ?? rounding?.insets ?? .zero,
       resizingMode: .stretch
     )
   }
@@ -105,30 +134,44 @@ extension UIImage {
     return size.width / size.height
   }
   
-  public static func gradientImage(colors: [UIColor], cornerRadius: CGFloat = 0, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {
-    let gradient = CAGradientLayer()
-    gradient.frame = CGRect(
+  public static func gradientImage(colors: [UIColor], rounding: Rounding? = nil, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {
+    let rect = CGRect(
       origin: .zero,
       size: CGSize(
         width: insets.left + insets.right + 50,
         height: insets.top + insets.bottom + 50
       )
     )
+    let maskLayer = CAShapeLayer()
+    maskLayer.path = UIBezierPath(
+      roundedRect: rect,
+      byRoundingCorners: rounding?.corners ?? .allCorners,
+      cornerRadii: rounding?.radii ?? .zero
+    ).cgPath
+    maskLayer.frame = rect
+
+    let gradient = CAGradientLayer()
+    gradient.frame = rect
     gradient.startPoint = stops.start
     gradient.endPoint = stops.end
     gradient.colors = colors.map { $0.cgColor }
-    gradient.cornerRadius = cornerRadius
-    return UIImage.imageWithLayer(gradient)?.resizableImage(withCapInsets: insets, resizingMode: .stretch)
+    
+    gradient.mask = maskLayer
+    
+    return UIImage.imageWithLayer(gradient)?.resizableImage(
+      withCapInsets: insets,
+      resizingMode: .stretch
+    )
   }
 }
 
 extension UIBezierPath {
-  public convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, cornerRadius: CGFloat) {
+  public convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, rounding: Rounding?) {
 
     let strokeWidth = stroke?.width ?? 0
     let size = CGSize(
-      width: 1 + cornerRadius * 2,
-      height: 1 + cornerRadius * 2
+      width: 1 + (rounding?.radii.width ?? 0) * 2,
+      height: 1 + (rounding?.radii.height ?? 0) * 2
     )
     
     let rect = CGRect(
@@ -143,10 +186,11 @@ extension UIBezierPath {
         dx: strokeWidth,
         dy: strokeWidth
     )
-    if cornerRadius > 0 {
+    if let rounding = rounding {
       self.init(
         roundedRect: rect,
-        cornerRadius: cornerRadius
+        byRoundingCorners: rounding.corners,
+        cornerRadii: rounding.radii
       )
     } else {
       self.init(
