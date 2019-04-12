@@ -101,17 +101,6 @@ extension UIButton {
       return color?.withAlphaComponent(dim ? 0.4 : 1)
     }
     
-    var defaultTheme: Theme {
-      switch self {
-      case .filled, .gradient:
-        return .dark
-      case .bordered:
-        return .extraLight
-      default:
-        return .light
-      }
-    }
-    
     public static func ==(_ lhs: Style, _ rhs: Style) -> Bool {
       switch (lhs, rhs){
       case (.gradient(let lhsColors), .gradient(let rhsColors)):
@@ -126,16 +115,13 @@ extension UIButton {
     }
   }
   
-  public convenience init(style: Style, size: Size = .big, theme: Theme? = nil, type: UIButton.ButtonType = .system) {
+  public convenience init(style: Style, size: Size = .big, theme: Theme, type: UIButton.ButtonType = .system) {
     self.init(type: type)
     
     setStyle(style, size: size, theme: theme)
   }
   
-  public func setStyle(_ style: Style, size: Size = .big, theme t: Theme? = nil) {
-    
-    let theme = t ?? style.defaultTheme
-    
+  public func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
     backgroundColor = .clear
     
     let verticalInset: CGFloat = size == Size.small ? 10 : 16

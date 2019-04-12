@@ -130,10 +130,6 @@ extension UIImage {
     return newImage!
   }
   
-  public var aspectRatio: CGFloat {
-    return size.width / size.height
-  }
-  
   public static func gradientImage(colors: [UIColor], rounding: Rounding? = nil, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {
     let rect = CGRect(
       origin: .zero,
