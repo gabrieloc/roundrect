@@ -19,36 +19,33 @@ extension UIButton {
   
   public enum Style: Equatable {
     
-    case gradient(from: UIColor, to: UIColor, cornerRadius: CGFloat)
-    case bordered(cornerRadius: CGFloat)
-    case filled(cornerRadius: CGFloat)
+    case gradient(from: UIColor, to: UIColor, rounding: Rounding)
+    case bordered(rounding: Rounding)
+    case filled(rounding: Rounding)
     case titleOnly
     
     func roundedButtonBackground(for theme: Theme, dim: Bool = false) -> UIImage? {
       let alpha: CGFloat = dim ? 0.05 : theme == .extraLight ? 0.1 : 1
       
       switch self {
-      case .gradient(let from, let to, let cornerRadius):
+      case .gradient(let from, let to, let rounding):
         return UIImage.gradientImage(
           colors: [from, to].map {
             $0.withAlphaComponent(alpha)
           },
-          cornerRadius: cornerRadius,
-          insets: UIEdgeInsets(equalInsets: cornerRadius)
+          rounding: rounding,
+          insets: rounding.insets
         )
-      case .bordered(let cornerRadius),
-           .filled(let cornerRadius):
+      case .bordered(let rounding),
+           .filled(let rounding):
         return UIImage.resizableImage(
           fill: fillColor(for: theme),
           stroke: (
             color: strokeColor(for: theme),
             width: strokeWidth
           ),
-          cornerRadius: cornerRadius,
-          insets: UIEdgeInsets(
-            x: cornerRadius,
-            y: cornerRadius
-          ),
+          rounding: rounding,
+          insets: rounding.insets,
           alpha: alpha
           )?.withRenderingMode(.alwaysTemplate)
       default:
@@ -104,17 +101,6 @@ extension UIButton {
       return color?.withAlphaComponent(dim ? 0.4 : 1)
     }
     
-    var defaultTheme: Theme {
-      switch self {
-      case .filled, .gradient:
-        return .dark
-      case .bordered:
-        return .extraLight
-      default:
-        return .light
-      }
-    }
-    
     public static func ==(_ lhs: Style, _ rhs: Style) -> Bool {
       switch (lhs, rhs){
       case (.gradient(let lhsColors), .gradient(let rhsColors)):
@@ -129,16 +115,13 @@ extension UIButton {
     }
   }
   
-  public convenience init(style: Style, size: Size = .big, theme: Theme? = nil, type: UIButton.ButtonType = .system) {
+  public convenience init(style: Style, size: Size = .big, theme: Theme, type: UIButton.ButtonType = .system) {
     self.init(type: type)
     
     setStyle(style, size: size, theme: theme)
   }
   
-  public func setStyle(_ style: Style, size: Size = .big, theme t: Theme? = nil) {
-    
-    let theme = t ?? style.defaultTheme
-    
+  public func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
     backgroundColor = .clear
     
     let verticalInset: CGFloat = size == Size.small ? 10 : 16
@@ -147,8 +130,8 @@ extension UIButton {
     setBackgroundImage(normalImage, for: .normal)
     
     let selectedStyle: Style
-    if case Style.bordered(let radius) = style {
-      selectedStyle = .filled(cornerRadius: radius)
+    if case Style.bordered(let rounding) = style {
+      selectedStyle = .filled(rounding: rounding)
     } else {
       selectedStyle = style
     }
@@ -162,16 +145,19 @@ extension UIButton {
     setBackgroundImage(highlightedImage, for: .highlighted)
     
     switch style {
-      case .bordered(let cornerRadius),
-           .filled(let cornerRadius),
-           .gradient(_, _, let cornerRadius):
-        let disabledStyle = Style.filled(cornerRadius: cornerRadius)
+      case .bordered(let rounding),
+           .filled(let rounding),
+           .gradient(_, _, let rounding):
+        let disabledStyle = Style.filled(rounding: rounding)
         let disabledImage = disabledStyle.roundedButtonBackground(
           for: theme,
           dim: true
         )
         setBackgroundImage(disabledImage, for: .disabled)
-        contentEdgeInsets = UIEdgeInsets(x: cornerRadius, y: verticalInset)
+        contentEdgeInsets = UIEdgeInsets(
+          x: rounding.radii.height,
+          y: verticalInset
+        )
     default:
       break
     }

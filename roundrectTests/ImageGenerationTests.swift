@@ -68,7 +68,7 @@ class ImageGenerationTests: FBSnapshotTestCase {
   func testRoundedImage() {
     let image = UIImage(
       fill: .blue,
-      cornerRadius: 10
+      rounding: .all(10)
     )!
     verifyImage(image)
   }
@@ -80,7 +80,25 @@ class ImageGenerationTests: FBSnapshotTestCase {
         color: .red,
         width: 1
       ),
-      cornerRadius: 10
+      rounding: .all(10)
+      )!
+    verifyImage(image)
+  }
+  
+  func testConditionallyRoundedStrokedImage() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 1
+      ),
+      rounding: .some(
+        corners: [.bottomLeft, .topRight, .bottomRight],
+        radii: CGSize(
+          width: 10,
+          height: 10
+        )
+      )
       )!
     verifyImage(image)
   }
@@ -100,7 +118,22 @@ class ImageGenerationTests: FBSnapshotTestCase {
   func testRoundedGradientImage() {
     let image = UIImage.gradientImage(
       colors: [.blue, .red],
-      cornerRadius: 10,
+      rounding: .all(10),
+      insets: .zero
+      )!
+    verifyImage(image)
+  }
+  
+  func testConditionallyRoundedGradientImage() {
+    let image = UIImage.gradientImage(
+      colors: [.blue, .red],
+      rounding: .some(
+        corners: [.bottomLeft, .topRight, .bottomRight],
+        radii: CGSize(
+          width: 10,
+          height: 10
+        )
+      ),
       insets: .zero
       )!
     verifyImage(image)
