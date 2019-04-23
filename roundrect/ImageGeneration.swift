@@ -8,33 +8,60 @@
 
 import UIKit
 
+public struct Corners: Equatable {
+  let topLeft: CGFloat
+  let topRight: CGFloat
+  let bottomRight: CGFloat
+  let bottomLeft: CGFloat
+  
+  var maxRadius: CGFloat {
+    return max(topLeft, topRight, bottomRight, bottomLeft)
+  }
+  
+  func path(in rect: CGRect) -> UIBezierPath {
+    return UIBezierPath(
+      roundedRect: rect,
+      topLeftRadius: topLeft,
+      topRightRadius: topRight,
+      bottomLeftRadius: bottomLeft,
+      bottomRightRadius: bottomRight
+    )
+  }
+}
+
+extension Corners {
+  init(equalRadius radius: CGFloat) {
+    self.topLeft = radius
+    self.topRight = radius
+    self.bottomRight = radius
+    self.bottomLeft = radius
+  }
+}
+
 public enum Rounding: Equatable {
-  case all(CGFloat)
-  case some(corners: UIRectCorner, radii: CGSize)
-  
-  var corners: UIRectCorner {
-    switch self {
-    case .all:
-      return .allCorners
-    case .some(let corners, _):
-      return corners
-    }
-  }
-  
-  var radii: CGSize {
-    switch self {
-    case .all(let value):
-      return CGSize(width: value, height: value)
-    case .some(_, let radii):
-      return radii
-    }
-  }
+  case all(radius: CGFloat)
+  case some(corners: Corners)
   
   var insets: UIEdgeInsets {
-    return UIEdgeInsets(
-      x: radii.width,
-      y: radii.height
-    )
+    switch self {
+    case .all(let radius):
+      return UIEdgeInsets(
+        equalInsets: radius
+      )
+    case .some(let corners):
+      return UIEdgeInsets(
+        equalInsets: corners.maxRadius
+      )
+    }
+  }
+  
+  var corners: Corners {
+    switch self {
+    case .all(let radius):
+      return Corners(equalRadius: radius)
+    case .some(let corners):
+      return corners
+    }
   }
 }
 
@@ -145,13 +172,9 @@ extension UIImage {
     gradient.endPoint = stops.end
     gradient.colors = colors.map { $0.cgColor }
     
-    if let rounding = rounding {
+    if let corners = rounding?.corners {
       let maskLayer = CAShapeLayer()
-      maskLayer.path = UIBezierPath(
-        roundedRect: rect,
-        byRoundingCorners: rounding.corners,
-        cornerRadii: rounding.radii
-        ).cgPath
+      maskLayer.path = corners.path(in: rect).cgPath
       maskLayer.frame = rect
       gradient.mask = maskLayer
     }
@@ -167,10 +190,8 @@ extension UIBezierPath {
   public convenience init(fill: UIColor, stroke: (color: UIColor, width: CGFloat)?, rounding: Rounding?) {
 
     let strokeWidth = stroke?.width ?? 0
-    let size = CGSize(
-      width: 1 + (rounding?.radii.width ?? 0) * 2,
-      height: 1 + (rounding?.radii.height ?? 0) * 2
-    )
+    let radiusInset = rounding?.corners.maxRadius ?? 0
+    let size: CGSize = .one + radiusInset * 2
     
     let rect = CGRect(
       origin: .zero,
@@ -184,11 +205,13 @@ extension UIBezierPath {
         dx: strokeWidth,
         dy: strokeWidth
     )
-    if let rounding = rounding {
+    if let corners = rounding?.corners {
       self.init(
         roundedRect: rect,
-        byRoundingCorners: rounding.corners,
-        cornerRadii: rounding.radii
+        topLeftRadius: corners.topLeft,
+        topRightRadius: corners.topRight,
+        bottomLeftRadius: corners.bottomLeft,
+        bottomRightRadius: corners.bottomRight
       )
     } else {
       self.init(

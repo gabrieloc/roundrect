@@ -100,7 +100,7 @@ extension UIButton.Style: RawRepresentable {
   }
   
   static func allValues(cornerRadius: CGFloat) -> [UIButton.Style] {
-    let rounding = Rounding.all(cornerRadius)
+    let rounding = Rounding.all(radius: cornerRadius)
     return [
       .filled(rounding: rounding),
       .bordered(rounding: rounding),

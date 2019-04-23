@@ -155,7 +155,7 @@ extension UIButton {
         )
         setBackgroundImage(disabledImage, for: .disabled)
         contentEdgeInsets = UIEdgeInsets(
-          x: rounding.radii.height,
+          x: max(rounding.insets.left, rounding.insets.right),
           y: verticalInset
         )
     default:
