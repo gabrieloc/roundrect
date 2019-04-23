@@ -1,0 +1,5 @@
+os: osx
+language: swift
+xcode_project: roundrect.xcodeproj
+xcode_scheme: roundrect
+xcode_destination: platform=iOS Simulator,OS=10.2
