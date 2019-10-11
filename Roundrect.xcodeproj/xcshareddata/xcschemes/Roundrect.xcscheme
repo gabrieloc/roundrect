@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B2D841B921E95EB10044ED5A"
-               BuildableName = "roundrect.framework"
-               BlueprintName = "roundrect"
+               BuildableName = "Roundrect.framework"
+               BlueprintName = "Roundrect"
                ReferencedContainer = "container:roundrect.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,31 +26,29 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B2D841B921E95EB10044ED5A"
+            BuildableName = "Roundrect.framework"
+            BlueprintName = "Roundrect"
+            ReferencedContainer = "container:roundrect.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B2D841C221E95EB20044ED5A"
-               BuildableName = "roundrectTests.xctest"
-               BlueprintName = "roundrectTests"
+               BuildableName = "RoundrectTests.xctest"
+               BlueprintName = "RoundrectTests"
                ReferencedContainer = "container:roundrect.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B2D841B921E95EB10044ED5A"
-            BuildableName = "roundrect.framework"
-            BlueprintName = "roundrect"
-            ReferencedContainer = "container:roundrect.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -66,25 +64,23 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2D841B921E95EB10044ED5A"
-            BuildableName = "roundrect.framework"
-            BlueprintName = "roundrect"
+            BuildableName = "Roundrect.framework"
+            BlueprintName = "Roundrect"
             ReferencedContainer = "container:roundrect.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "FB_REFERENCE_IMAGE_DIR"
-            value = "$(SOURCE_ROOT)/$(TARGET_NAME)Tests/recorded/ReferenceImages"
+            value = "$(SOURCE_ROOT)/Tests/recorded/ReferenceImages"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "IMAGE_DIFF_DIR"
-            value = "$(SOURCE_ROOT)/$(TARGET_NAME)Tests/recorded/FailureDiffs"
+            value = "$(SOURCE_ROOT)/Tests/recorded/FailureDiffs"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -96,8 +92,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B2D841B921E95EB10044ED5A"
-            BuildableName = "roundrect.framework"
-            BlueprintName = "roundrect"
+            BuildableName = "Roundrect.framework"
+            BlueprintName = "Roundrect"
             ReferencedContainer = "container:roundrect.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
