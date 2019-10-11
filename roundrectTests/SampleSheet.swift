@@ -1,13 +1,13 @@
 //
 //  SampleSheet.swift
-//  roundrectTests
+//  RoundrectTests
 //
 //  Created by Gabriel O'Flaherty-Chan on 2019-01-12.
 //  Copyright © 2019 gabrieloc. All rights reserved.
 //
 
 import UIKit
-@testable import roundrect
+@testable import Roundrect
 
 class SampleSheet: UIView {
   override init(frame: CGRect) {

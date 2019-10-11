@@ -1,6 +1,6 @@
 //
 //  SampleSheetTests.swift
-//  roundrectTests
+//  RoundrectTests
 //
 //  Created by Gabriel O'Flaherty-Chan on 2019-01-12.
 //  Copyright © 2019 gabrieloc. All rights reserved.

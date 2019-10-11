@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2D841C421E95EB20044ED5A /* roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* roundrect.framework */; };
+		B2D841C421E95EB20044ED5A /* Roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* Roundrect.framework */; };
 		B2D841CB21E95EB20044ED5A /* roundrect.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D841BD21E95EB10044ED5A /* roundrect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2D841E821E95FC70044ED5A /* ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E721E95FC70044ED5A /* ImageGeneration.swift */; };
 		B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */; };
@@ -32,10 +32,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B2D841BA21E95EB10044ED5A /* roundrect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = roundrect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B26FA94A235111F00054518F /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		B2D841BA21E95EB10044ED5A /* Roundrect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Roundrect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D841BD21E95EB10044ED5A /* roundrect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = roundrect.h; sourceTree = "<group>"; };
 		B2D841BE21E95EB10044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2D841C321E95EB20044ED5A /* roundrectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = roundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2D841C321E95EB20044ED5A /* RoundrectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D841CA21E95EB20044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2D841E721E95FC70044ED5A /* ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneration.swift; sourceTree = "<group>"; };
 		B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationTests.swift; sourceTree = "<group>"; };
@@ -62,7 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */,
-				B2D841C421E95EB20044ED5A /* roundrect.framework in Frameworks */,
+				B2D841C421E95EB20044ED5A /* Roundrect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +73,7 @@
 		B2D841B021E95EB10044ED5A = {
 			isa = PBXGroup;
 			children = (
+				B26FA94A235111F00054518F /* Package.swift */,
 				B2D841BC21E95EB10044ED5A /* roundrect */,
 				B2D841C721E95EB20044ED5A /* roundrectTests */,
 				B2D841BB21E95EB10044ED5A /* Products */,
@@ -82,8 +84,8 @@
 		B2D841BB21E95EB10044ED5A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B2D841BA21E95EB10044ED5A /* roundrect.framework */,
-				B2D841C321E95EB20044ED5A /* roundrectTests.xctest */,
+				B2D841BA21E95EB10044ED5A /* Roundrect.framework */,
+				B2D841C321E95EB20044ED5A /* RoundrectTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -136,9 +138,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B2D841B921E95EB10044ED5A /* roundrect */ = {
+		B2D841B921E95EB10044ED5A /* Roundrect */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B2D841CE21E95EB20044ED5A /* Build configuration list for PBXNativeTarget "roundrect" */;
+			buildConfigurationList = B2D841CE21E95EB20044ED5A /* Build configuration list for PBXNativeTarget "Roundrect" */;
 			buildPhases = (
 				B2D841B521E95EB10044ED5A /* Headers */,
 				B2D841B621E95EB10044ED5A /* Sources */,
@@ -149,14 +151,14 @@
 			);
 			dependencies = (
 			);
-			name = roundrect;
+			name = Roundrect;
 			productName = roundrect;
-			productReference = B2D841BA21E95EB10044ED5A /* roundrect.framework */;
+			productReference = B2D841BA21E95EB10044ED5A /* Roundrect.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B2D841C221E95EB20044ED5A /* roundrectTests */ = {
+		B2D841C221E95EB20044ED5A /* RoundrectTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B2D841D121E95EB20044ED5A /* Build configuration list for PBXNativeTarget "roundrectTests" */;
+			buildConfigurationList = B2D841D121E95EB20044ED5A /* Build configuration list for PBXNativeTarget "RoundrectTests" */;
 			buildPhases = (
 				B2E9C51621E961B900FB1B08 /* ShellScript */,
 				B2D841BF21E95EB20044ED5A /* Sources */,
@@ -168,9 +170,9 @@
 			dependencies = (
 				B2D841C621E95EB20044ED5A /* PBXTargetDependency */,
 			);
-			name = roundrectTests;
+			name = RoundrectTests;
 			productName = roundrectTests;
-			productReference = B2D841C321E95EB20044ED5A /* roundrectTests.xctest */;
+			productReference = B2D841C321E95EB20044ED5A /* RoundrectTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -206,8 +208,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B2D841B921E95EB10044ED5A /* roundrect */,
-				B2D841C221E95EB20044ED5A /* roundrectTests */,
+				B2D841B921E95EB10044ED5A /* Roundrect */,
+				B2D841C221E95EB20044ED5A /* RoundrectTests */,
 			);
 		};
 /* End PBXProject section */
@@ -279,7 +281,7 @@
 /* Begin PBXTargetDependency section */
 		B2D841C621E95EB20044ED5A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B2D841B921E95EB10044ED5A /* roundrect */;
+			target = B2D841B921E95EB10044ED5A /* Roundrect */;
 			targetProxy = B2D841C521E95EB20044ED5A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -426,8 +428,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gabrieloc.roundrect;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Roundrect;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -451,8 +454,9 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gabrieloc.roundrect;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = Roundrect;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -514,7 +518,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B2D841CE21E95EB20044ED5A /* Build configuration list for PBXNativeTarget "roundrect" */ = {
+		B2D841CE21E95EB20044ED5A /* Build configuration list for PBXNativeTarget "Roundrect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2D841CF21E95EB20044ED5A /* Debug */,
@@ -523,7 +527,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B2D841D121E95EB20044ED5A /* Build configuration list for PBXNativeTarget "roundrectTests" */ = {
+		B2D841D121E95EB20044ED5A /* Build configuration list for PBXNativeTarget "RoundrectTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2D841D221E95EB20044ED5A /* Debug */,

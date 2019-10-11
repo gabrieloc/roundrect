@@ -1,6 +1,6 @@
 //
 //  ButtonStyle.swift
-//  roundrect
+//  Roundrect
 //
 //  Created by Gabriel O'Flaherty-Chan on 2019-01-11.
 //  Copyright © 2019 gabrieloc. All rights reserved.
