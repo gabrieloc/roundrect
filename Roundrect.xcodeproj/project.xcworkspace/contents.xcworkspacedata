@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:roundrect.xcodeproj">
+      location = "self:/Users/gabrieloc/src/roundrect/Roundrect.xcodeproj">
    </FileRef>
 </Workspace>

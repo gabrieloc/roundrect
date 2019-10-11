@@ -7,18 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2D841C421E95EB20044ED5A /* Roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* Roundrect.framework */; };
-		B2D841CB21E95EB20044ED5A /* roundrect.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D841BD21E95EB10044ED5A /* roundrect.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B2D841E821E95FC70044ED5A /* ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E721E95FC70044ED5A /* ImageGeneration.swift */; };
-		B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */; };
+		B26FA94F235114A20054518F /* Source in Resources */ = {isa = PBXBuildFile; fileRef = B26FA94D235114A20054518F /* Source */; };
+		B26FA950235114A40054518F /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = B26FA94C235114A20054518F /* Tests */; };
+		B26FA951235115960054518F /* Roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* Roundrect.framework */; };
 		B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */; };
-		B2E9C51C21E962A500FB1B08 /* recorded in Resources */ = {isa = PBXBuildFile; fileRef = B2E9C51B21E962A500FB1B08 /* recorded */; };
-		B2E9C51E21E9635C00FB1B08 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C51D21E9635C00FB1B08 /* ButtonStyle.swift */; };
-		B2E9C52021E963D000FB1B08 /* ButtonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */; };
-		B2E9C52221E9642D00FB1B08 /* ButtonStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */; };
-		B2E9C52421E9645F00FB1B08 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52321E9645F00FB1B08 /* Util.swift */; };
-		B2E9C52621EAA0BB00FB1B08 /* SampleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52521EAA0BB00FB1B08 /* SampleSheet.swift */; };
-		B2E9C52821EAA1FF00FB1B08 /* SampleSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2E9C52721EAA1FF00FB1B08 /* SampleSheetTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,21 +25,11 @@
 
 /* Begin PBXFileReference section */
 		B26FA94A235111F00054518F /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		B26FA94C235114A20054518F /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
+		B26FA94D235114A20054518F /* Source */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Source; sourceTree = "<group>"; };
 		B2D841BA21E95EB10044ED5A /* Roundrect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Roundrect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2D841BD21E95EB10044ED5A /* roundrect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = roundrect.h; sourceTree = "<group>"; };
-		B2D841BE21E95EB10044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2D841C321E95EB20044ED5A /* RoundrectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2D841CA21E95EB20044ED5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B2D841E721E95FC70044ED5A /* ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneration.swift; sourceTree = "<group>"; };
-		B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationTests.swift; sourceTree = "<group>"; };
 		B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
-		B2E9C51B21E962A500FB1B08 /* recorded */ = {isa = PBXFileReference; lastKnownFileType = folder; path = recorded; sourceTree = "<group>"; };
-		B2E9C51D21E9635C00FB1B08 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
-		B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTheme.swift; sourceTree = "<group>"; };
-		B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyleTests.swift; sourceTree = "<group>"; };
-		B2E9C52321E9645F00FB1B08 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
-		B2E9C52521EAA0BB00FB1B08 /* SampleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSheet.swift; sourceTree = "<group>"; };
-		B2E9C52721EAA1FF00FB1B08 /* SampleSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSheetTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +44,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B26FA951235115960054518F /* Roundrect.framework in Frameworks */,
 				B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */,
-				B2D841C421E95EB20044ED5A /* Roundrect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +56,8 @@
 			isa = PBXGroup;
 			children = (
 				B26FA94A235111F00054518F /* Package.swift */,
-				B2D841BC21E95EB10044ED5A /* roundrect */,
-				B2D841C721E95EB20044ED5A /* roundrectTests */,
+				B26FA94D235114A20054518F /* Source */,
+				B26FA94C235114A20054518F /* Tests */,
 				B2D841BB21E95EB10044ED5A /* Products */,
 				B2D841E521E95FAF0044ED5A /* Frameworks */,
 			);
@@ -88,32 +70,6 @@
 				B2D841C321E95EB20044ED5A /* RoundrectTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B2D841BC21E95EB10044ED5A /* roundrect */ = {
-			isa = PBXGroup;
-			children = (
-				B2D841E721E95FC70044ED5A /* ImageGeneration.swift */,
-				B2E9C51D21E9635C00FB1B08 /* ButtonStyle.swift */,
-				B2E9C51F21E963D000FB1B08 /* ButtonTheme.swift */,
-				B2E9C52321E9645F00FB1B08 /* Util.swift */,
-				B2D841BD21E95EB10044ED5A /* roundrect.h */,
-				B2D841BE21E95EB10044ED5A /* Info.plist */,
-			);
-			path = roundrect;
-			sourceTree = "<group>";
-		};
-		B2D841C721E95EB20044ED5A /* roundrectTests */ = {
-			isa = PBXGroup;
-			children = (
-				B2D841E921E95FDB0044ED5A /* ImageGenerationTests.swift */,
-				B2E9C52121E9642D00FB1B08 /* ButtonStyleTests.swift */,
-				B2E9C52721EAA1FF00FB1B08 /* SampleSheetTests.swift */,
-				B2E9C52521EAA0BB00FB1B08 /* SampleSheet.swift */,
-				B2D841CA21E95EB20044ED5A /* Info.plist */,
-				B2E9C51B21E962A500FB1B08 /* recorded */,
-			);
-			path = roundrectTests;
 			sourceTree = "<group>";
 		};
 		B2D841E521E95FAF0044ED5A /* Frameworks */ = {
@@ -131,7 +87,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2D841CB21E95EB20044ED5A /* roundrect.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +150,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B2D841B421E95EB10044ED5A /* Build configuration list for PBXProject "roundrect" */;
+			buildConfigurationList = B2D841B421E95EB10044ED5A /* Build configuration list for PBXProject "Roundrect" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,6 +174,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B26FA94F235114A20054518F /* Source in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,7 +182,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2E9C51C21E962A500FB1B08 /* recorded in Resources */,
+				B26FA950235114A40054518F /* Tests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,10 +214,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2D841E821E95FC70044ED5A /* ImageGeneration.swift in Sources */,
-				B2E9C52421E9645F00FB1B08 /* Util.swift in Sources */,
-				B2E9C51E21E9635C00FB1B08 /* ButtonStyle.swift in Sources */,
-				B2E9C52021E963D000FB1B08 /* ButtonTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,10 +221,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2E9C52821EAA1FF00FB1B08 /* SampleSheetTests.swift in Sources */,
-				B2E9C52221E9642D00FB1B08 /* ButtonStyleTests.swift in Sources */,
-				B2D841EB21E95FDD0044ED5A /* ImageGenerationTests.swift in Sources */,
-				B2E9C52621EAA0BB00FB1B08 /* SampleSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +369,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = roundrect/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,7 +395,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = roundrect/Info.plist;
+				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -465,14 +413,13 @@
 		B2D841D221E95EB20044ED5A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/roundrect/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = roundrectTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -487,14 +434,13 @@
 		B2D841D321E95EB20044ED5A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/roundrect/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = roundrectTests/Info.plist;
+				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -509,7 +455,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B2D841B421E95EB10044ED5A /* Build configuration list for PBXProject "roundrect" */ = {
+		B2D841B421E95EB10044ED5A /* Build configuration list for PBXProject "Roundrect" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B2D841CC21E95EB20044ED5A /* Debug */,
