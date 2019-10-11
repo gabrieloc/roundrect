@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B26FA94F235114A20054518F /* Sources in Resources */ = {isa = PBXBuildFile; fileRef = B26FA94D235114A20054518F /* Sources */; };
-		B26FA950235114A40054518F /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = B26FA94C235114A20054518F /* Tests */; };
 		B26FA951235115960054518F /* Roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* Roundrect.framework */; };
+		B26FA9562351189E0054518F /* RoundrectTests in Resources */ = {isa = PBXBuildFile; fileRef = B26FA9552351189E0054518F /* RoundrectTests */; };
 		B2E9C51A21E9625900FB1B08 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,8 +25,8 @@
 
 /* Begin PBXFileReference section */
 		B26FA94A235111F00054518F /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		B26FA94C235114A20054518F /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
 		B26FA94D235114A20054518F /* Sources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sources; sourceTree = "<group>"; };
+		B26FA9552351189E0054518F /* RoundrectTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RoundrectTests; sourceTree = "<group>"; };
 		B2D841BA21E95EB10044ED5A /* Roundrect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Roundrect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D841C321E95EB20044ED5A /* RoundrectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2E9C51921E9625900FB1B08 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -57,9 +57,9 @@
 			children = (
 				B26FA94A235111F00054518F /* Package.swift */,
 				B26FA94D235114A20054518F /* Sources */,
-				B26FA94C235114A20054518F /* Tests */,
-				B2D841BB21E95EB10044ED5A /* Products */,
+				B26FA9552351189E0054518F /* RoundrectTests */,
 				B2D841E521E95FAF0044ED5A /* Frameworks */,
+				B2D841BB21E95EB10044ED5A /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B26FA94F235114A20054518F /* Sources in Resources */,
+				B26FA9562351189E0054518F /* RoundrectTests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,7 +183,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B26FA950235114A40054518F /* Tests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
