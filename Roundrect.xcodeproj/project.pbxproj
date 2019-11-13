@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B25AA326237B7F69001AFF2C /* Roundrect.h in Headers */ = {isa = PBXBuildFile; fileRef = B25AA325237B7F65001AFF2C /* Roundrect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B26FA94F235114A20054518F /* Sources in Resources */ = {isa = PBXBuildFile; fileRef = B26FA94D235114A20054518F /* Sources */; };
 		B26FA951235115960054518F /* Roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D841BA21E95EB10044ED5A /* Roundrect.framework */; };
 		B26FA9562351189E0054518F /* RoundrectTests in Resources */ = {isa = PBXBuildFile; fileRef = B26FA9552351189E0054518F /* RoundrectTests */; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B25AA325237B7F65001AFF2C /* Roundrect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Roundrect.h; sourceTree = "<group>"; };
 		B26FA94A235111F00054518F /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		B26FA94D235114A20054518F /* Sources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sources; sourceTree = "<group>"; };
 		B26FA9552351189E0054518F /* RoundrectTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = RoundrectTests; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 		B2D841B021E95EB10044ED5A = {
 			isa = PBXGroup;
 			children = (
+				B25AA325237B7F65001AFF2C /* Roundrect.h */,
 				B26FA94A235111F00054518F /* Package.swift */,
 				B26FA94D235114A20054518F /* Sources */,
 				B26FA9552351189E0054518F /* RoundrectTests */,
@@ -87,6 +90,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B25AA326237B7F69001AFF2C /* Roundrect.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
