@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B266546A23ECC5D500B1FE3E /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = B266546923ECC5D500B1FE3E /* SnapshotTesting */; };
+		OBJ_66 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ButtonStyle.swift */; };
+		OBJ_67 /* ButtonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* ButtonTheme.swift */; };
+		OBJ_68 /* ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ImageGeneration.swift */; };
+		OBJ_69 /* Roundrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Roundrect.swift */; };
+		OBJ_70 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Util.swift */; };
+		OBJ_88 /* ButtonStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* ButtonStyleTests.swift */; };
+		OBJ_89 /* ImageGenerationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* ImageGenerationTests.swift */; };
+		OBJ_90 /* SampleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* SampleSheet.swift */; };
+		OBJ_91 /* SampleSheetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* SampleSheetTests.swift */; };
+		OBJ_94 /* Roundrect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "Roundrect::Roundrect::Product" /* Roundrect.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B266546623ECC4C500B1FE3E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = "Roundrect::Roundrect";
+			remoteInfo = Roundrect;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		OBJ_10 /* ButtonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTheme.swift; sourceTree = "<group>"; };
+		OBJ_11 /* ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneration.swift; sourceTree = "<group>"; };
+		OBJ_12 /* Roundrect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roundrect.swift; sourceTree = "<group>"; };
+		OBJ_13 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		OBJ_16 /* ButtonStyleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyleTests.swift; sourceTree = "<group>"; };
+		OBJ_17 /* ImageGenerationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationTests.swift; sourceTree = "<group>"; };
+		OBJ_18 /* SampleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSheet.swift; sourceTree = "<group>"; };
+		OBJ_19 /* SampleSheetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSheetTests.swift; sourceTree = "<group>"; };
+		OBJ_23 /* AssertInlineSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertInlineSnapshot.swift; sourceTree = "<group>"; };
+		OBJ_24 /* AssertSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssertSnapshot.swift; sourceTree = "<group>"; };
+		OBJ_25 /* Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Async.swift; sourceTree = "<group>"; };
+		OBJ_27 /* Internal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Internal.swift; sourceTree = "<group>"; };
+		OBJ_28 /* PlistEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistEncoder.swift; sourceTree = "<group>"; };
+		OBJ_29 /* String+SpecialCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SpecialCharacters.swift"; sourceTree = "<group>"; };
+		OBJ_30 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		OBJ_31 /* XCTAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTAttachment.swift; sourceTree = "<group>"; };
+		OBJ_32 /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		OBJ_33 /* Diffing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diffing.swift; sourceTree = "<group>"; };
+		OBJ_35 /* Wait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wait.swift; sourceTree = "<group>"; };
+		OBJ_36 /* SnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotTestCase.swift; sourceTree = "<group>"; };
+		OBJ_37 /* Snapshotting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshotting.swift; sourceTree = "<group>"; };
+		OBJ_39 /* Any.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Any.swift; sourceTree = "<group>"; };
+		OBJ_40 /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
+		OBJ_41 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
+		OBJ_42 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		OBJ_43 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		OBJ_44 /* Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Description.swift; sourceTree = "<group>"; };
+		OBJ_45 /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
+		OBJ_46 /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
+		OBJ_47 /* NSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSViewController.swift; sourceTree = "<group>"; };
+		OBJ_48 /* SceneKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKit.swift; sourceTree = "<group>"; };
+		OBJ_49 /* SpriteKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKit.swift; sourceTree = "<group>"; };
+		OBJ_50 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		OBJ_51 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		OBJ_52 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		OBJ_53 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		OBJ_54 /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
+		OBJ_55 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = Package.swift; path = "/Users/gabrieloc/src/Roundrect/.build/checkouts/swift-snapshot-testing/Package.swift"; sourceTree = "<group>"; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		OBJ_9 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
+		"Roundrect::Roundrect::Product" /* Roundrect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Roundrect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		"Roundrect::RoundrectTests::Product" /* RoundrectTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = RoundrectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_71 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				B266546A23ECC5D500B1FE3E /* SnapshotTesting in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_94 /* Roundrect.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_14 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_15 /* RoundrectTests */,
+			);
+			name = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_15 /* RoundrectTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* ButtonStyleTests.swift */,
+				OBJ_17 /* ImageGenerationTests.swift */,
+				OBJ_18 /* SampleSheet.swift */,
+				OBJ_19 /* SampleSheetTests.swift */,
+			);
+			name = RoundrectTests;
+			path = Tests/RoundrectTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_20 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_21 /* SnapshotTesting 1.7.1 */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		OBJ_21 /* SnapshotTesting 1.7.1 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_22 /* SnapshotTesting */,
+				OBJ_55 /* Package.swift */,
+			);
+			name = "SnapshotTesting 1.7.1";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_22 /* SnapshotTesting */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_23 /* AssertInlineSnapshot.swift */,
+				OBJ_24 /* AssertSnapshot.swift */,
+				OBJ_25 /* Async.swift */,
+				OBJ_26 /* Common */,
+				OBJ_32 /* Diff.swift */,
+				OBJ_33 /* Diffing.swift */,
+				OBJ_34 /* Extensions */,
+				OBJ_36 /* SnapshotTestCase.swift */,
+				OBJ_37 /* Snapshotting.swift */,
+				OBJ_38 /* Snapshotting */,
+			);
+			name = SnapshotTesting;
+			path = ".build/checkouts/swift-snapshot-testing/Sources/SnapshotTesting";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_26 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_27 /* Internal.swift */,
+				OBJ_28 /* PlistEncoder.swift */,
+				OBJ_29 /* String+SpecialCharacters.swift */,
+				OBJ_30 /* View.swift */,
+				OBJ_31 /* XCTAttachment.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		OBJ_34 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_35 /* Wait.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		OBJ_38 /* Snapshotting */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_39 /* Any.swift */,
+				OBJ_40 /* CALayer.swift */,
+				OBJ_41 /* CaseIterable.swift */,
+				OBJ_42 /* Codable.swift */,
+				OBJ_43 /* Data.swift */,
+				OBJ_44 /* Description.swift */,
+				OBJ_45 /* NSImage.swift */,
+				OBJ_46 /* NSView.swift */,
+				OBJ_47 /* NSViewController.swift */,
+				OBJ_48 /* SceneKit.swift */,
+				OBJ_49 /* SpriteKit.swift */,
+				OBJ_50 /* String.swift */,
+				OBJ_51 /* UIImage.swift */,
+				OBJ_52 /* UIView.swift */,
+				OBJ_53 /* UIViewController.swift */,
+				OBJ_54 /* URLRequest.swift */,
+			);
+			path = Snapshotting;
+			sourceTree = "<group>";
+		};
+		OBJ_5 /*  */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_14 /* Tests */,
+				OBJ_20 /* Dependencies */,
+				OBJ_56 /* Products */,
+				OBJ_60 /* README.md */,
+			);
+			name = "";
+			sourceTree = "<group>";
+		};
+		OBJ_56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				"Roundrect::Roundrect::Product" /* Roundrect.framework */,
+				"Roundrect::RoundrectTests::Product" /* RoundrectTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* Roundrect */,
+			);
+			name = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_8 /* Roundrect */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* ButtonStyle.swift */,
+				OBJ_10 /* ButtonTheme.swift */,
+				OBJ_11 /* ImageGeneration.swift */,
+				OBJ_12 /* Roundrect.swift */,
+				OBJ_13 /* Util.swift */,
+			);
+			name = Roundrect;
+			path = Sources/Roundrect;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		"Roundrect::Roundrect" /* Roundrect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_62 /* Build configuration list for PBXNativeTarget "Roundrect" */;
+			buildPhases = (
+				OBJ_65 /* Sources */,
+				OBJ_71 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Roundrect;
+			packageProductDependencies = (
+				B266546923ECC5D500B1FE3E /* SnapshotTesting */,
+			);
+			productName = Roundrect;
+			productReference = "Roundrect::Roundrect::Product" /* Roundrect.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		"Roundrect::RoundrectTests" /* RoundrectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_84 /* Build configuration list for PBXNativeTarget "RoundrectTests" */;
+			buildPhases = (
+				OBJ_87 /* Sources */,
+				OBJ_92 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_97 /* PBXTargetDependency */,
+			);
+			name = RoundrectTests;
+			productName = RoundrectTests;
+			productReference = "Roundrect::RoundrectTests::Product" /* RoundrectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 9999;
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Roundrect" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5 /*  */;
+			packageReferences = (
+				B266546823ECC5D500B1FE3E /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
+			productRefGroup = OBJ_56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				"Roundrect::Roundrect" /* Roundrect */,
+				"Roundrect::RoundrectTests" /* RoundrectTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_66 /* ButtonStyle.swift in Sources */,
+				OBJ_67 /* ButtonTheme.swift in Sources */,
+				OBJ_68 /* ImageGeneration.swift in Sources */,
+				OBJ_69 /* Roundrect.swift in Sources */,
+				OBJ_70 /* Util.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_88 /* ButtonStyleTests.swift in Sources */,
+				OBJ_89 /* ImageGenerationTests.swift in Sources */,
+				OBJ_90 /* SampleSheet.swift in Sources */,
+				OBJ_91 /* SampleSheetTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = "Roundrect::Roundrect" /* Roundrect */;
+			targetProxy = B266546623ECC4C500B1FE3E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+					"DEBUG=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE DEBUG";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"SWIFT_PACKAGE=1",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "$(inherited) -DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SWIFT_PACKAGE";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Roundrect.xcodeproj/Roundrect_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
+				);
+				MARKETING_VERSION = 1.2;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Roundrect;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Roundrect;
+			};
+			name = Debug;
+		};
+		OBJ_64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Roundrect.xcodeproj/Roundrect_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(TOOLCHAIN_DIR)/usr/lib/swift/macosx",
+				);
+				MARKETING_VERSION = 1.2;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Roundrect;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = Roundrect;
+			};
+			name = Release;
+		};
+		OBJ_85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Roundrect.xcodeproj/RoundrectTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = RoundrectTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		OBJ_86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = Roundrect.xcodeproj/RoundrectTests_Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@loader_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_CFLAGS = "$(inherited)";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited)";
+				SWIFT_VERSION = 5.0;
+				TARGET_NAME = RoundrectTests;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_2 /* Build configuration list for PBXProject "Roundrect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_62 /* Build configuration list for PBXNativeTarget "Roundrect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_63 /* Debug */,
+				OBJ_64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		OBJ_84 /* Build configuration list for PBXNativeTarget "RoundrectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_85 /* Debug */,
+				OBJ_86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B266546823ECC5D500B1FE3E /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B266546923ECC5D500B1FE3E /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B266546823ECC5D500B1FE3E /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = OBJ_1 /* Project object */;
+}
