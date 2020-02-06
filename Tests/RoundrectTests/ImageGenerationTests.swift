@@ -1,0 +1,147 @@
+//
+//  ImageGenerationTests.swift
+//  Roundrect
+//
+//  Created by Gabriel O'Flaherty-Chan on 2019-01-11.
+//  Copyright © 2019 gabrieloc. All rights reserved.
+//
+
+import SnapshotTesting
+import XCTest
+@testable import Roundrect
+
+class ImageGenerationTests: XCTestCase {
+
+  func testViewRasterization() {
+    let view = UILabel()
+    view.text = "👹"
+    view.isOpaque = false
+    view.sizeToFit()
+    let image = UIImage(view: view)
+    verifyImage(image)
+  }
+
+  func testFilledImage() {
+    let image = UIImage(
+      fill: .blue
+    )!
+    verifyImage(image)
+  }
+
+  func testStrokedImage() {
+    let image = UIImage(
+      fill: .clear,
+      stroke: (
+        color: .blue,
+        width: 1
+      )
+    )!
+    verifyImage(image)
+  }
+
+  func testStrokedImageNoLineWidth() {
+    let image = UIImage(
+      fill: .red,
+      stroke: (
+        color: .blue,
+        width: 0
+      )
+    )!
+    verifyImage(image)
+  }
+
+  func testFilledAndStrokedImage() {
+    let image = UIImage(
+      fill: .red,
+      stroke: (
+        color: .blue,
+        width: 10
+      )
+    )!
+    verifyImage(image)
+  }
+
+  func testRoundedImage() {
+    let image = UIImage(
+      fill: .blue,
+      rounding: .all(10)
+    )!
+    verifyImage(image)
+  }
+
+  func testRoundedStrokedImage() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 1
+      ),
+      rounding: .all(10)
+    )!
+    verifyImage(image)
+  }
+
+  func testConditionallyRoundedStrokedImage() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 1
+      ),
+      rounding: .some(
+        corners: [.bottomLeft, .topRight, .bottomRight],
+        radii: CGSize(
+          width: 10,
+          height: 10
+        )
+      )
+    )!
+    verifyImage(image)
+  }
+
+  func testGradientImage() {
+    let image = UIImage.gradientImage(
+      colors: [.blue, .red],
+      insets: .zero,
+      stops: (
+        start: CGPoint(x: 0, y: 0),
+        end: CGPoint(x: 1, y: 1)
+      )
+    )!
+    verifyImage(image)
+  }
+
+  func testRoundedGradientImage() {
+    let image = UIImage.gradientImage(
+      colors: [.blue, .red],
+      rounding: .all(10),
+      insets: .zero
+    )!
+    verifyImage(image)
+  }
+
+  func testConditionallyRoundedGradientImage() {
+    let image = UIImage.gradientImage(
+      colors: [.blue, .red],
+      rounding: .some(
+        corners: [.bottomLeft, .topRight, .bottomRight],
+        radii: CGSize(
+          width: 10,
+          height: 10
+        )
+      ),
+      insets: .zero
+    )!
+    verifyImage(image)
+  }
+
+  func verifyImage(_ image: UIImage, testName: String = #function, file: StaticString = #file, line: UInt = #line) {
+    assertSnapshot(
+      matching: UIImageView(image: image),
+      as: .image(size: image.size),
+      file: file,
+      testName: testName,
+      line: line
+    )
+  }
+}

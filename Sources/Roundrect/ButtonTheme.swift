@@ -13,7 +13,7 @@ import UIKit
 extension UIButton {
   public enum Theme: String, CaseIterable {
     case extraLight, light, dark
-    
+
     var foregroundColor: UIColor {
       switch self {
       case .light, .extraLight:
@@ -22,7 +22,7 @@ extension UIButton {
         return .white
       }
     }
-    
+
     var inverse: Theme {
       switch self {
       case .dark:
@@ -32,5 +32,5 @@ extension UIButton {
       }
     }
   }
-  
+
 }
