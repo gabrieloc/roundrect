@@ -18,70 +18,103 @@ extension UIButton {
   }
 
   public enum Style: Equatable {
+    static let highlightedAlpha: CGFloat = 0.2
+    static let disabledAlpha: CGFloat = 0.5
 
-    case gradient(from: UIColor, to: UIColor, rounding: Rounding)
-    case bordered(rounding: Rounding)
-    case filled(rounding: Rounding)
-    case titleOnly
+    case gradient(from: UIColor, to: UIColor, rounding: Rounding, alpha: CGFloat)
+    case bordered(rounding: Rounding, color: UIColor?, alpha: CGFloat)
+    case filled(rounding: Rounding, color: UIColor?, alpha: CGFloat)
+    case titleOnly(color: UIColor?, alpha: CGFloat)
 
     var rounding: Rounding? {
       switch self {
-      case .bordered(let rounding),
-         .filled(let rounding),
-         .gradient(_, _, let rounding):
+      case .bordered(let rounding, _, _),
+         .filled(let rounding, _, _),
+         .gradient(_, _, let rounding, _):
         return rounding
       case .titleOnly:
         return nil
       }
     }
 
-    @available(iOS, obsoleted: 13)
-    func roundedButtonBackground(for theme: Theme, dim: Bool = false) -> UIImage? {
-      let alpha: CGFloat = dim ? 0.05 : theme == .extraLight ? 0.1 : 1
-      return roundedButtonBackground(dim: dim, alpha: alpha)
+    var disabledColor: UIColor {
+      if #available(iOS 13, *) {
+        return UIColor.tertiaryLabel
+      }
+      return UIColor.gray
     }
 
-    func roundedButtonBackground(dim: Bool = false, alpha: CGFloat = 1) -> UIImage? {
+    var disabled: Style {
       switch self {
-      case .gradient(let from, let to, let rounding):
+      case .filled(let rounding, let c, _),
+         .bordered(let rounding, let c, _):
+        if let color = c {
+          return .filled(rounding: rounding, color: color.grayscale, alpha: 1)
+        } else {
+          return .filled(rounding: rounding, color: disabledColor, alpha: 1)
+        }
+      case .gradient(let from, let to, let rounding, _):
+        return .gradient(from: from.grayscale, to: to.grayscale, rounding: rounding, alpha: Self.disabledAlpha)
+      case .titleOnly(let c, _):
+        if let color = c {
+          return .titleOnly(color: color.grayscale, alpha: 1)
+        } else {
+          return .titleOnly(color: nil, alpha: Self.disabledAlpha)
+        }
+      }
+    }
+
+    var highlighted: Style {
+      switch self {
+      case .filled(let rounding, let c, _):
+        return .filled(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
+      case .bordered(let rounding, let c, _):
+        return .bordered(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
+      case .gradient(let from, let to, let rounding, _):
+        return .gradient(
+          from: from.withAlphaComponent(Self.highlightedAlpha),
+          to: to.withAlphaComponent(Self.highlightedAlpha),
+          rounding: rounding,
+          alpha: Self.highlightedAlpha
+        )
+      case .titleOnly(let c, _):
+        if let color = c {
+          return .titleOnly(color: color, alpha: 1)
+        } else {
+          return .titleOnly(color: nil, alpha: Self.highlightedAlpha)
+        }
+      }
+    }
+
+    var backgroundImage: UIImage? {
+      switch self {
+      case .gradient(let from, let to, let rounding, let alpha):
         return UIImage.gradientImage(
-          colors: [from, to],
+          colors: [from.withAlphaComponent(alpha), to.withAlphaComponent(alpha)],
           rounding: rounding,
           insets: rounding.insets
         )
-      case .bordered(let rounding),
-         .filled(let rounding):
+      case .bordered(let rounding, let c, let alpha):
         return UIImage.resizableImage(
-          fill: maskFillColor,
+          fill: .clear,
           stroke: (
-            color: maskStrokeColor,
+            color: c ?? .black,
             width: strokeWidth
           ),
           rounding: rounding,
           insets: rounding.insets,
           alpha: alpha
-        )?.withRenderingMode(.alwaysTemplate)
-      default:
+        )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
+      case .filled(let rounding, let c, let alpha):
+        return UIImage.resizableImage(
+          fill: c ?? .black,
+          stroke: nil,
+          rounding: rounding,
+          insets: rounding.insets,
+          alpha: alpha
+        )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
+      case .titleOnly:
         return nil
-      }
-    }
-
-    var maskFillColor: UIColor {
-      switch self {
-      case .filled:
-        return .black
-      default:
-        return .clear
-      }
-    }
-
-    var maskStrokeColor: UIColor {
-      switch self {
-      case .titleOnly,
-         .gradient:
-        return .clear
-      default:
-        return .black
       }
     }
 
@@ -96,19 +129,19 @@ extension UIButton {
     }
 
     @available(iOS, obsoleted: 13)
-    func titleColor(for theme: Theme, state: UIControl.State) -> UIColor? {
+    func titleColor(state: UIControl.State, theme: Theme) -> UIColor? {
       let color: UIColor? = {
-        if theme == .extraLight || state == .disabled {
+        guard state != .disabled else {
           return theme.foregroundColor
         }
 
         switch self {
         case .titleOnly:
-          return theme == .light ? nil : .white
+          return theme == .dark ? .white : nil
         case .gradient, .filled:
-          return .white
+          return theme == .extraLight ? .black : .white
         case .bordered:
-          return theme.foregroundColor
+          return nil
         }
       }()
       let dim = state == .disabled
@@ -117,19 +150,15 @@ extension UIButton {
 
     @available(iOS 13, *)
     func titleColor(state: UIControl.State) -> UIColor? {
-      let color: UIColor? = {
-        if state == .disabled {
-          return UIColor.tertiaryLabel
-        }
-        switch self {
-        case .titleOnly, .bordered:
-          return nil
-        case .gradient, .filled:
-          return .label
-        }
-      }()
-      let dim = state == .disabled
-      return color?.withAlphaComponent(dim ? 0.4 : 1)
+      if state == .disabled {
+        return UIColor.tertiaryLabel
+      }
+      switch self {
+      case .titleOnly, .bordered:
+        return nil
+      case .gradient, .filled:
+        return .white
+      }
     }
 
     public static func == (_ lhs: Style, _ rhs: Style) -> Bool {
@@ -159,105 +188,41 @@ extension UIButton {
     setStyle(style, size: size, theme: theme)
   }
 
+  var configurableStates: [UIControl.State] {
+    return [.normal, .selected, .highlighted, .disabled]
+  }
+
   @available(iOS, obsoleted: 13)
   public func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
-    setAttributes(
-        .init(
-          normalAttributes: .init(
-            background: { $0.roundedButtonBackground(for: theme) },
-            textColor: style.titleColor(for: theme, state: .normal)
-          ),
-          highlightedAttributes: .init(
-            background: { $0.roundedButtonBackground(for: theme) },
-            textColor: style.titleColor(for: theme, state: .highlighted)
-          ),
-          selectedAttributes: .init(
-            background: { $0.roundedButtonBackground(for: theme) }
-            ,
-            textColor: style.titleColor(for: theme, state: .selected)
-          ),
-          disabledAttributes: .init(
-            background: { $0.roundedButtonBackground(for: theme) },
-            textColor: style.titleColor(for: theme, state: .disabled)
-          ),
-          normalStyle: style,
-          size: size
-        )
-    )
+    configureCommonAttributes(style, size: size)
+    if theme == .extraLight {
+      setBackgroundImage(style.backgroundImage?.withAlpha(0.4), for: .normal)
+    }
+    configurableStates.forEach {
+      setTitleColor(style.titleColor(state: $0, theme: theme), for: $0)
+    }
   }
 
   @available(iOS 13, *)
   public func setStyle(_ style: Style, size: Size = .big) {
-    setAttributes(
-        .init(
-          normalAttributes: .init(
-            background: { $0.roundedButtonBackground() },
-            textColor: style.titleColor(state: .normal)
-          ),
-          highlightedAttributes: .init(
-            background: { $0.roundedButtonBackground() },
-            textColor: style.titleColor(state: .highlighted)
-          ),
-          selectedAttributes: .init(
-            background: { $0.roundedButtonBackground() },
-            textColor: style.titleColor(state: .selected)
-          ),
-          disabledAttributes: .init(
-            background: { $0.roundedButtonBackground() },
-            textColor: style.titleColor(state: .disabled)
-          ),
-          normalStyle: style,
-          size: size
-        )
-    )
-  }
-
-  struct StateAttributes {
-    struct Attributes {
-      let background: (UIButton.Style) -> UIImage?
-      let textColor: UIColor?
+    configureCommonAttributes(style, size: size)
+    configurableStates.forEach {
+      setTitleColor(style.titleColor(state: $0), for: $0)
     }
-
-    let normalAttributes: Attributes
-    let highlightedAttributes: Attributes
-    let selectedAttributes: Attributes
-    let disabledAttributes: Attributes
-    let normalStyle: UIButton.Style
-    let size: Size
   }
 
-  func setAttributes(_ attributes: StateAttributes) {
+  private func configureCommonAttributes(_ style: Style, size: Size) {
     backgroundColor = .clear
 
-    let selectedStyle: Style = {
-      if case Style.bordered(let rounding) = attributes.normalStyle {
-        return .filled(rounding: rounding)
-      }
-      return attributes.normalStyle
-    }()
+    setBackgroundImage(style.backgroundImage, for: .normal)
+    setBackgroundImage(style.highlighted.backgroundImage, for: .selected)
+    setBackgroundImage(style.highlighted.backgroundImage, for: .highlighted)
+    setBackgroundImage(style.disabled.backgroundImage?.withRenderingMode(.alwaysOriginal), for: .disabled)
 
-
-    let disabledStyle: Style = {
-      if let rounding = attributes.normalStyle.rounding {
-        return .filled(rounding: rounding)
-      }
-      return attributes.normalStyle
-    }()
-
-    setBackgroundImage(attributes.normalAttributes.background(attributes.normalStyle), for: .normal)
-    setBackgroundImage(attributes.selectedAttributes.background(selectedStyle), for: .selected)
-    setBackgroundImage(attributes.highlightedAttributes.background(attributes.normalStyle), for: .highlighted)
-    setBackgroundImage(attributes.disabledAttributes.background(disabledStyle), for: .disabled)
-
-    setTitleColor(attributes.normalAttributes.textColor, for: .normal)
-    setTitleColor(attributes.selectedAttributes.textColor, for: .selected)
-    setTitleColor(attributes.highlightedAttributes.textColor, for: .highlighted)
-    setTitleColor(attributes.disabledAttributes.textColor, for: .disabled)
-
-    if let rounding = attributes.normalStyle.rounding {
+    if let rounding = style.rounding {
       contentEdgeInsets = UIEdgeInsets(
         x: rounding.radii.height,
-        y: attributes.size == .small ? 10 : 16
+        y: size == .small ? 10 : 16
       )
     }
     contentHorizontalAlignment = .center

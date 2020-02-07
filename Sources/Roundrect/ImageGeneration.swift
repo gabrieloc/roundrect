@@ -115,6 +115,10 @@ extension UIImage {
   }
 
   public func withAlpha(_ alpha: CGFloat) -> UIImage {
+    defer {
+      UIGraphicsEndImageContext()
+
+    }
     UIGraphicsBeginImageContextWithOptions(
       size,
       false,
@@ -125,9 +129,10 @@ extension UIImage {
       blendMode: .normal,
       alpha: alpha
     )
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return newImage!
+    let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+    return newImage
+      .resizableImage(withCapInsets: capInsets, resizingMode: resizingMode)
+      .withRenderingMode(renderingMode)
   }
 
   public static func gradientImage(colors: [UIColor], rounding: Rounding? = nil, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {

@@ -19,7 +19,7 @@ class ButtonStyleTests: XCTestCase {
   let styles = UIButton.Style.allValues(cornerRadius: 10)
 
   @available(iOS 13, *)
-  func testLightMode() {
+  func testInterfaceStyleCombinations() {
     UIButton.Size.allCases.forEach { size in
       State.allCases.forEach { state in
         styles.forEach { style in
@@ -119,7 +119,7 @@ extension UIButton.Style: RawRepresentable {
 
   public var rawValue: String {
     switch self {
-    case .gradient(let from, let to, let cornerRadius):
+    case .gradient(let from, let to, let cornerRadius, _):
       return "gradient \(cornerRadius) \(from)-\(to)"
     case .bordered(let cornerRadius):
       return "bordered \(cornerRadius)"
@@ -133,10 +133,10 @@ extension UIButton.Style: RawRepresentable {
   static func allValues(cornerRadius: CGFloat) -> [UIButton.Style] {
     let rounding = Rounding.all(cornerRadius)
     return [
-        .filled(rounding: rounding),
-        .bordered(rounding: rounding),
-        .gradient(from: .red, to: .blue, rounding: rounding),
-        .titleOnly
+        .filled(rounding: rounding, color: nil, alpha: 1),
+        .bordered(rounding: rounding, color: nil, alpha: 1),
+        .gradient(from: .red, to: .blue, rounding: rounding, alpha: 1),
+        .titleOnly(color: .red, alpha: 1)
     ]
   }
 }

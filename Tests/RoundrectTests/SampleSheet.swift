@@ -13,14 +13,13 @@ class SampleSheet: UIView {
   let innerMargin: CGFloat = 8
   let gutter: CGFloat = 4
   let styles = UIButton.Style.allValues(cornerRadius: 10)
-  let themes = UIButton.Theme.allCases
   let states = ButtonStyleTests.State.allCases
   let sheetInset = UIEdgeInsets(equalInsets: 32)
   let sectionMargin = (x: CGFloat(16), y: CGFloat(16))
   let sectionInset: CGFloat = 32
 
-
-  override init(frame: CGRect) {
+  @available(iOS, obsoleted: 13)
+  init(frame: CGRect, themes: [UIButton.Theme]) {
     super.init(frame: frame)
 
     styles.forEach { style in
@@ -40,37 +39,58 @@ class SampleSheet: UIView {
       header.text = style.title
       addSubview(header)
 
-      if #available(iOS 13.0, *) {
-        backgroundColor = .systemBackground
+      header.textColor = .black
+      backgroundColor = .white
+      themes.forEach { theme in
         drawColumn(
           rect: rect,
-          i: 0,
-          of: 1,
-          name: nil,
-          textColor: .label,
-          backgroundColor: .systemBackground,
+          i: themes.firstIndex(of: theme)!,
+          of: themes.count,
+          name: theme.rawValue,
+          textColor: theme.foregroundColor.withAlphaComponent(0.5),
+          backgroundColor: theme.inverse.foregroundColor,
           style: style,
-          headerFrame: header.frame) {
-          UIButton(style: style)
-        }
-      } else {
-        header.textColor = .black
-        backgroundColor = .white
-        themes.forEach { theme in
-          drawColumn(
-            rect: rect,
-            i: themes.firstIndex(of: theme)!,
-            of: themes.count,
-            name: theme.rawValue,
-            textColor: theme.foregroundColor.withAlphaComponent(0.5),
-            backgroundColor: theme.inverse.foregroundColor,
-            style: style,
-            headerFrame: header.frame,
-            createButton: {
-              UIButton(style: style, theme: theme)
-            }
+          headerFrame: header.frame,
+          createButton: {
+            UIButton(style: style, theme: theme)
+          }
+        )
+      }
+    }
+  }
+
+  @available (iOS 13.0, *)
+  init(frame: CGRect, a: Bool = true) {
+    super.init(frame: frame)
+
+    styles.forEach { style in
+      let section = styles.firstIndex(of: style)!
+      let rect = sectionRect(in: frame.inset(by: sheetInset), section: section)
+
+      let header = UILabel(
+        frame: CGRect(
+          origin: rect.origin,
+          size: CGSize(
+            width: rect.width,
+            height: 40
           )
-        }
+        )
+      )
+      header.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
+      header.text = style.title
+      addSubview(header)
+
+      backgroundColor = .systemBackground
+      drawColumn(
+        rect: rect,
+        i: 0,
+        of: 1,
+        name: nil,
+        textColor: .label,
+        backgroundColor: .systemBackground,
+        style: style,
+        headerFrame: header.frame) {
+        UIButton(style: style)
       }
     }
   }
@@ -95,28 +115,29 @@ class SampleSheet: UIView {
   func drawColumn(rect: CGRect, i: Int, of: Int, name: String?, textColor: UIColor, backgroundColor: UIColor?, style: UIButton.Style, headerFrame: CGRect, createButton: (() -> UIButton)) {
     let columnWidth = rect.width / CGFloat(of)
     let ti = CGFloat(i)
-    let themeFrame = CGRect(
+    let columnFrame = CGRect(
       origin: CGPoint(
         x: rect.minX + columnWidth * ti,
         y: headerFrame.maxY
       ),
       size: CGSize(
-        width: columnWidth - (gutter + (CGFloat(themes.count) - 1) * ti),
+        width: columnWidth - (gutter + (CGFloat(of) - 1) * ti),
         height: rect.height - headerFrame.height
       )
     )
-    let background = UIView(frame: themeFrame)
+    let background = UIView(frame: columnFrame)
     background.backgroundColor = backgroundColor
+    background.layer.cornerRadius = 4
     addSubview(background)
 
     let columnLabel = UILabel(
       frame: CGRect(
         origin: CGPoint(
-          x: themeFrame.minX,
-          y: themeFrame.minY + 4
+          x: columnFrame.minX,
+          y: columnFrame.minY + 4
         ),
         size: CGSize(
-          width: themeFrame.width,
+          width: columnFrame.width,
           height: 16
         )
       )
@@ -126,43 +147,32 @@ class SampleSheet: UIView {
     columnLabel.textAlignment = .center
     addSubview(columnLabel)
     columnLabel.textColor = textColor
-
-    states.forEach { state in
+    states.enumerated().forEach {
       drawButton(
         createButton(),
-        in: themeFrame,
-        i: i,
-        state: state,
-        style: style
+        in: columnFrame,
+        i: $0.offset,
+        of: states.count,
+        state: $0.element,
+        style: style,
+        sectionInset: name != nil ? sectionInset : 16
       )
     }
   }
 
 
-  func drawButton(_ button: UIButton, in themeFrame: CGRect, i: Int, state: ButtonStyleTests.State, style: UIButton.Style) {
-    let insetX = CGFloat(i) * gutter
-    let stateHeight = (themeFrame.height - sectionInset) / CGFloat(states.count)
-    let stateFrame = CGRect(
-      origin: CGPoint(
-        x: themeFrame.minX + insetX,
-        y: sectionInset + themeFrame.minY + stateHeight * CGFloat(states.firstIndex(of: state)!)
-      ),
-      size: CGSize(
-        width: themeFrame.width - insetX * 2,
-        height: stateHeight
-      )
-    )
-    let buttonHeight = stateFrame.height - innerMargin
+  func drawButton(_ button: UIButton, in themeFrame: CGRect, i: Int, of: Int, state: ButtonStyleTests.State, style: UIButton.Style, sectionInset: CGFloat) {
+    let stateHeight = (themeFrame.height - sectionInset) / CGFloat(of)
     let buttonFrame = CGRect(
       origin: CGPoint(
-        x: stateFrame.minX,
-        y: stateFrame.midY - buttonHeight * 0.5
+        x: themeFrame.minX,
+        y: sectionInset + themeFrame.minY + stateHeight * CGFloat(i)
       ),
       size: CGSize(
-        width: stateFrame.width,
-        height: buttonHeight
+        width: themeFrame.width,
+        height: stateHeight
       )
-    )
+    ).inset(by: UIEdgeInsets(equalInsets: gutter))
     button.setTitle(state.rawValue.capitalized, for: .normal)
     button.isEnabled = state != .disabled
     button.isHighlighted = state == .highlighted
