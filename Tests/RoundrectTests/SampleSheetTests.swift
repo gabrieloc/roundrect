@@ -10,7 +10,6 @@ import SnapshotTesting
 import XCTest
 
 class SampleSheetTests: XCTestCase {
-
   @available(iOS 13.0, *)
   func testGenerateSampleSheetLightDark() {
     let canvas = CGRect(

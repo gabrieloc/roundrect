@@ -39,22 +39,17 @@ extension UIButton {
 
     var disabledColor: UIColor {
       if #available(iOS 13, *) {
-        return UIColor.tertiaryLabel
+        return UIColor.quaternarySystemFill
       }
-      return UIColor.gray
+      return UIColor(white: 0.5, alpha: 0.5)
     }
 
     var disabled: Style {
       switch self {
-      case .filled(let rounding, let c, _),
-         .bordered(let rounding, let c, _):
-        if let color = c {
-          return .filled(rounding: rounding, color: color.grayscale, alpha: 1)
-        } else {
-          return .filled(rounding: rounding, color: disabledColor, alpha: 1)
-        }
-      case .gradient(let from, let to, let rounding, _):
-        return .gradient(from: from.grayscale, to: to.grayscale, rounding: rounding, alpha: Self.disabledAlpha)
+      case .filled(let rounding, _, _),
+         .bordered(let rounding, _, _),
+         .gradient(_, _, let rounding, _):
+        return .filled(rounding: rounding, color: disabledColor, alpha: 1)
       case .titleOnly(let c, _):
         if let color = c {
           return .titleOnly(color: color.grayscale, alpha: 1)
