@@ -31,6 +31,7 @@ API exists for an explicit `theme` to be provided, but it's marked as obsolete a
 ![](sample.png)
 
 iOS13+ variations for light and dark mode
+
 | light | dark |
 | --- | --- |
-| ![](sample-light.png) | ![](sample-dark.png) | 
+|![](sample-light.png) | ![](sample-dark.png) | 
