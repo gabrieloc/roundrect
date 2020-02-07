@@ -11,6 +11,7 @@ import UIKit
 // dark theme is dark button with light text
 // light theme is light button with dark text
 extension UIButton {
+  @available(iOS, obsoleted: 13, message: "Rely on UIUserInterfaceStyle")
   public enum Theme: String, CaseIterable {
     case extraLight, light, dark
 

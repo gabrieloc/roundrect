@@ -18,12 +18,20 @@ This image can be made resizable and applied to a `UIButton`, but since there is
 let button = UIButton(
   style: .filled(
     cornerRadius: 8
-  ),
-  theme: .light
+  )
 )
 ```
 This will yield a button with a tintable fill and a corner radius of 8.
 
-## Code coverage
-Image generation and button styling tests rely on [FBSnapshotTestCase](https://github.com/uber/ios-snapshot-test-case), which is linked using Carthage. To see what's tested, view the reference images in `roundrectTests/recorded/`. `SampleSheetTests` generates an asset displaying every combination of style and theme, providing a quick preview of what's available:
-![roundrect](sample.png)
+API exists for an explicit `theme` to be provided, but it's marked as obsolete as of iOS13 in favour of light/dark mode provided by `UIInterfaceStyle`.
+
+## Examples
+
+<iOS13 variations with explicit themes
+![](sample.png)
+
+iOS13+ variations for light and dark mode
+
+| light | dark |
+| --- | --- |
+|![](sample-light.png) | ![](sample-dark.png) | 

@@ -8,164 +8,218 @@
 
 import UIKit
 
-extension UIButton {  
+extension UIButton {
   public enum Size: String, CaseIterable {
     case small, big
   }
-  
+
   public enum ActionType: String, CaseIterable {
     case primary, dismiss
   }
-  
+
   public enum Style: Equatable {
-    
-    case gradient(from: UIColor, to: UIColor, rounding: Rounding)
-    case bordered(rounding: Rounding)
-    case filled(rounding: Rounding)
-    case titleOnly
-    
-    func roundedButtonBackground(for theme: Theme, dim: Bool = false) -> UIImage? {
-      let alpha: CGFloat = dim ? 0.05 : theme == .extraLight ? 0.1 : 1
-      
+    static let highlightedAlpha: CGFloat = 0.2
+    static let disabledAlpha: CGFloat = 0.5
+
+    case gradient(from: UIColor, to: UIColor, rounding: Rounding, alpha: CGFloat)
+    case bordered(rounding: Rounding, color: UIColor?, alpha: CGFloat)
+    case filled(rounding: Rounding, color: UIColor?, alpha: CGFloat)
+    case titleOnly(color: UIColor?, alpha: CGFloat)
+
+    var rounding: Rounding? {
       switch self {
-      case .gradient(let from, let to, let rounding):
+      case .bordered(let rounding, _, _),
+         .filled(let rounding, _, _),
+         .gradient(_, _, let rounding, _):
+        return rounding
+      case .titleOnly:
+        return nil
+      }
+    }
+
+    var disabledColor: UIColor {
+      if #available(iOS 13, *) {
+        return UIColor.quaternarySystemFill
+      }
+      return UIColor(white: 0.5, alpha: 0.5)
+    }
+
+    var disabled: Style {
+      switch self {
+      case .filled(let rounding, _, _),
+         .bordered(let rounding, _, _),
+         .gradient(_, _, let rounding, _):
+        return .filled(rounding: rounding, color: disabledColor, alpha: 1)
+      case .titleOnly(let c, _):
+        if let color = c {
+          return .titleOnly(color: color.grayscale, alpha: 1)
+        } else {
+          return .titleOnly(color: nil, alpha: Self.disabledAlpha)
+        }
+      }
+    }
+
+    var highlighted: Style {
+      switch self {
+      case .filled(let rounding, let c, _):
+        return .filled(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
+      case .bordered(let rounding, let c, _):
+        return .bordered(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
+      case .gradient(let from, let to, let rounding, _):
+        return .gradient(
+          from: from.withAlphaComponent(Self.highlightedAlpha),
+          to: to.withAlphaComponent(Self.highlightedAlpha),
+          rounding: rounding,
+          alpha: Self.highlightedAlpha
+        )
+      case .titleOnly(let c, _):
+        if let color = c {
+          return .titleOnly(color: color, alpha: 1)
+        } else {
+          return .titleOnly(color: nil, alpha: Self.highlightedAlpha)
+        }
+      }
+    }
+
+    var backgroundImage: UIImage? {
+      switch self {
+      case .gradient(let from, let to, let rounding, let alpha):
         return UIImage.gradientImage(
-          colors: [from, to].map {
-            $0.withAlphaComponent(alpha)
-          },
+          colors: [from.withAlphaComponent(alpha), to.withAlphaComponent(alpha)],
           rounding: rounding,
           insets: rounding.insets
         )
-      case .bordered(let rounding),
-           .filled(let rounding):
+      case .bordered(let rounding, let c, let alpha):
         return UIImage.resizableImage(
-          fill: fillColor(for: theme),
+          fill: .clear,
           stroke: (
-            color: strokeColor(for: theme),
+            color: c ?? .black,
             width: strokeWidth
           ),
           rounding: rounding,
           insets: rounding.insets,
           alpha: alpha
-          )?.withRenderingMode(.alwaysTemplate)
-      default:
+        )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
+      case .filled(let rounding, let c, let alpha):
+        return UIImage.resizableImage(
+          fill: c ?? .black,
+          stroke: nil,
+          rounding: rounding,
+          insets: rounding.insets,
+          alpha: alpha
+        )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
+      case .titleOnly:
         return nil
       }
     }
-    
-    func fillColor(for theme: Theme) -> UIColor {
-      switch self {
-      case .filled:
-        return theme == .dark ? .black : .white
-      default:
-        return .clear
-      }
-    }
-    
-    func strokeColor(for theme: Theme) -> UIColor {
-      switch self {
-      case .titleOnly,
-           .gradient:
-        return .clear
-      default:
-        return theme == .dark ? .black : .white
-      }
-    }
-    
+
     var strokeWidth: CGFloat {
       switch self {
       case .titleOnly,
-           .gradient:
+         .gradient:
         return 0
       default:
         return 1
       }
     }
-    
-    func titleColor(for theme: Theme, state: UIControl.State) -> UIColor? {
+
+    @available(iOS, obsoleted: 13)
+    func titleColor(state: UIControl.State, theme: Theme) -> UIColor? {
       let color: UIColor? = {
-        if theme == .extraLight || state == .disabled {
+        guard state != .disabled else {
           return theme.foregroundColor
         }
-        
+
         switch self {
         case .titleOnly:
-          return theme == .light ? nil : .white
+          return theme == .dark ? .white : nil
         case .gradient, .filled:
-          return .white
+          return theme == .extraLight ? .black : .white
         case .bordered:
-          return theme.foregroundColor
+          return nil
         }
       }()
       let dim = state == .disabled
       return color?.withAlphaComponent(dim ? 0.4 : 1)
     }
-    
-    public static func ==(_ lhs: Style, _ rhs: Style) -> Bool {
-      switch (lhs, rhs){
+
+    @available(iOS 13, *)
+    func titleColor(state: UIControl.State) -> UIColor? {
+      if state == .disabled {
+        return UIColor.tertiaryLabel
+      }
+      switch self {
+      case .titleOnly, .bordered:
+        return nil
+      case .gradient, .filled:
+        return .white
+      }
+    }
+
+    public static func == (_ lhs: Style, _ rhs: Style) -> Bool {
+      switch (lhs, rhs) {
       case (.gradient(let lhsColors), .gradient(let rhsColors)):
         return lhsColors == rhsColors
       case (.bordered, .bordered),
-           (.filled, .filled),
-           (.titleOnly, .titleOnly):
+         (.filled, .filled),
+         (.titleOnly, .titleOnly):
         return true
       default:
         return false
       }
     }
   }
-  
+
+  @available(iOS 13.0, *)
+  public convenience init(style: Style, size: Size = .big, type: UIButton.ButtonType = .system) {
+    self.init(type: type)
+    setStyle(style, size: size)
+  }
+
+  @available(iOS, obsoleted: 13)
   public convenience init(style: Style, size: Size = .big, theme: Theme, type: UIButton.ButtonType = .system) {
     self.init(type: type)
-    
+
     setStyle(style, size: size, theme: theme)
   }
-  
+
+  var configurableStates: [UIControl.State] {
+    return [.normal, .selected, .highlighted, .disabled]
+  }
+
+  @available(iOS, obsoleted: 13)
   public func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
+    configureCommonAttributes(style, size: size)
+    if theme == .extraLight {
+      setBackgroundImage(style.backgroundImage?.withAlpha(0.4), for: .normal)
+    }
+    configurableStates.forEach {
+      setTitleColor(style.titleColor(state: $0, theme: theme), for: $0)
+    }
+  }
+
+  @available(iOS 13, *)
+  public func setStyle(_ style: Style, size: Size = .big) {
+    configureCommonAttributes(style, size: size)
+    configurableStates.forEach {
+      setTitleColor(style.titleColor(state: $0), for: $0)
+    }
+  }
+
+  private func configureCommonAttributes(_ style: Style, size: Size) {
     backgroundColor = .clear
-    
-    let verticalInset: CGFloat = size == Size.small ? 10 : 16
-    
-    let normalImage = style.roundedButtonBackground(for: theme)
-    setBackgroundImage(normalImage, for: .normal)
-    
-    let selectedStyle: Style
-    if case Style.bordered(let rounding) = style {
-      selectedStyle = .filled(rounding: rounding)
-    } else {
-      selectedStyle = style
+
+    setBackgroundImage(style.backgroundImage, for: .normal)
+    setBackgroundImage(style.highlighted.backgroundImage, for: .selected)
+    setBackgroundImage(style.highlighted.backgroundImage, for: .highlighted)
+    setBackgroundImage(style.disabled.backgroundImage?.withRenderingMode(.alwaysOriginal), for: .disabled)
+
+    if let rounding = style.rounding {
+      contentEdgeInsets = UIEdgeInsets(
+        x: rounding.radii.height,
+        y: size == .small ? 10 : 16
+      )
     }
-    let selectedImage = selectedStyle.roundedButtonBackground(for: theme)
-    setBackgroundImage(selectedImage, for: .selected)
-    
-    let highlightedImage = style.roundedButtonBackground(
-      for: theme,
-      dim: self.buttonType == .custom
-    )
-    setBackgroundImage(highlightedImage, for: .highlighted)
-    
-    switch style {
-      case .bordered(let rounding),
-           .filled(let rounding),
-           .gradient(_, _, let rounding):
-        let disabledStyle = Style.filled(rounding: rounding)
-        let disabledImage = disabledStyle.roundedButtonBackground(
-          for: theme,
-          dim: true
-        )
-        setBackgroundImage(disabledImage, for: .disabled)
-        contentEdgeInsets = UIEdgeInsets(
-          x: rounding.radii.height,
-          y: verticalInset
-        )
-    default:
-      break
-    }
-    
-    setTitleColor(style.titleColor(for: theme, state: .normal), for: .normal)
-    setTitleColor(style.titleColor(for: theme, state: .selected), for: .selected)
-    setTitleColor(style.titleColor(for: theme, state: .disabled), for: .disabled)
-    
     contentHorizontalAlignment = .center
     titleLabel?.adjustsFontSizeToFitWidth = true
     contentVerticalAlignment = .center
