@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild test -scheme "Roundrect" -destination "platform=iOS Simulator,OS=13.3,name=iPhone 8"
+
+
