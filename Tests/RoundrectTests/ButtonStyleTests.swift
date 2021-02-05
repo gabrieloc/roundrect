@@ -11,7 +11,6 @@ import XCTest
 @testable import Roundrect
 
 class ButtonStyleTests: XCTestCase {
-
   enum State: String, CaseIterable {
     case normal, highlighted, disabled
   }
@@ -72,9 +71,9 @@ class ButtonStyleTests: XCTestCase {
       style.rawValue,
       size.rawValue,
       theme.rawValue,
-      state.rawValue
+      state.rawValue,
     ]
-      .joined(separator: "-")
+    .joined(separator: "-")
     return (button, identifier)
   }
 
@@ -90,9 +89,9 @@ class ButtonStyleTests: XCTestCase {
     let identifier = [
       style.rawValue,
       size.rawValue,
-      state.rawValue
+      state.rawValue,
     ]
-      .joined(separator: "-")
+    .joined(separator: "-")
     return (button, identifier)
   }
 }
@@ -100,7 +99,7 @@ class ButtonStyleTests: XCTestCase {
 extension UIButton.Style: RawRepresentable {
   public typealias RawValue = String
 
-  public init?(rawValue: String) {
+  public init?(rawValue _: String) {
     return nil
   }
 
@@ -119,12 +118,12 @@ extension UIButton.Style: RawRepresentable {
 
   public var rawValue: String {
     switch self {
-    case .gradient(let from, let to, let cornerRadius, _):
+    case let .gradient(from, to, cornerRadius, _):
       return "gradient \(cornerRadius) \(from)-\(to)"
-    case .bordered(let cornerRadius):
-      return "bordered \(cornerRadius)"
-    case .filled(let cornerRadius):
-      return "filled \(cornerRadius)"
+    case let .bordered(rounding, _, alpha):
+      return "bordered \(rounding) \(alpha)"
+    case let .filled(rounding, _, alpha):
+      return "filled \(rounding) \(alpha)"
     case .titleOnly:
       return "titled"
     }
@@ -133,10 +132,10 @@ extension UIButton.Style: RawRepresentable {
   static func allValues(cornerRadius: CGFloat) -> [UIButton.Style] {
     let rounding = Rounding.all(cornerRadius)
     return [
-        .filled(rounding: rounding, color: nil, alpha: 1),
-        .bordered(rounding: rounding, color: nil, alpha: 1),
-        .gradient(from: .red, to: .blue, rounding: rounding, alpha: 1),
-        .titleOnly(color: .red, alpha: 1)
+      .filled(rounding: rounding, color: nil, alpha: 1),
+      .bordered(rounding: rounding, color: nil, alpha: 1),
+      .gradient(from: .red, to: .blue, rounding: rounding, alpha: 1),
+      .titleOnly(color: .red, alpha: 1),
     ]
   }
 }

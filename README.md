@@ -25,6 +25,10 @@ This will yield a button with a tintable fill and a corner radius of 8.
 
 API exists for an explicit `theme` to be provided, but it's marked as obsolete as of iOS13 in favour of light/dark mode provided by `UIInterfaceStyle`.
 
+## Contributing
+
+Snapshot tests are recorded with the **iOS 14.4 iPhone 12** simulator using the [Swift Snapshot Testing](https://github.com/pointfreeco/swift-snapshot-testing) library.
+
 ## Examples
 
 <iOS13 variations with explicit themes

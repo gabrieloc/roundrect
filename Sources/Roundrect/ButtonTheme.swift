@@ -10,9 +10,9 @@ import UIKit
 
 // dark theme is dark button with light text
 // light theme is light button with dark text
-extension UIButton {
+public extension UIButton {
   @available(iOS, obsoleted: 13, message: "Rely on UIUserInterfaceStyle")
-  public enum Theme: String, CaseIterable {
+  enum Theme: String, CaseIterable {
     case extraLight, light, dark
 
     var foregroundColor: UIColor {
@@ -24,7 +24,7 @@ extension UIButton {
       }
     }
 
-    var inverse: Theme {
+    var inverse: Self {
       switch self {
       case .dark:
         return .light
@@ -33,5 +33,4 @@ extension UIButton {
       }
     }
   }
-
 }

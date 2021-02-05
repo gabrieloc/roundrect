@@ -8,29 +8,29 @@
 
 import UIKit
 
-extension UIButton {
-  public enum Size: String, CaseIterable {
+public extension UIButton {
+  enum Size: String, CaseIterable {
     case small, big
   }
 
-  public enum ActionType: String, CaseIterable {
+  enum ActionType: String, CaseIterable {
     case primary, dismiss
   }
 
-  public enum Style: Equatable {
+  enum Style: Equatable {
     static let highlightedAlpha: CGFloat = 0.2
     static let disabledAlpha: CGFloat = 0.5
 
     case gradient(from: UIColor, to: UIColor, rounding: Rounding, alpha: CGFloat)
-    case bordered(rounding: Rounding, color: UIColor?, alpha: CGFloat)
-    case filled(rounding: Rounding, color: UIColor?, alpha: CGFloat)
-    case titleOnly(color: UIColor?, alpha: CGFloat)
+    case bordered(rounding: Rounding, color: UIColor? = nil, alpha: CGFloat = 1)
+    case filled(rounding: Rounding, color: UIColor? = nil, alpha: CGFloat = 1)
+    case titleOnly(color: UIColor? = nil, alpha: CGFloat = 1)
 
     var rounding: Rounding? {
       switch self {
-      case .bordered(let rounding, _, _),
-         .filled(let rounding, _, _),
-         .gradient(_, _, let rounding, _):
+      case let .bordered(rounding, _, _), let
+        .filled(rounding, _, _), let
+        .gradient(_, _, rounding, _):
         return rounding
       case .titleOnly:
         return nil
@@ -46,11 +46,11 @@ extension UIButton {
 
     var disabled: Style {
       switch self {
-      case .filled(let rounding, _, _),
-         .bordered(let rounding, _, _),
-         .gradient(_, _, let rounding, _):
+      case let .filled(rounding, _, _), let
+        .bordered(rounding, _, _), let
+        .gradient(_, _, rounding, _):
         return .filled(rounding: rounding, color: disabledColor, alpha: 1)
-      case .titleOnly(let c, _):
+      case let .titleOnly(c, _):
         if let color = c {
           return .titleOnly(color: color.grayscale, alpha: 1)
         } else {
@@ -61,18 +61,18 @@ extension UIButton {
 
     var highlighted: Style {
       switch self {
-      case .filled(let rounding, let c, _):
+      case let .filled(rounding, c, _):
         return .filled(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
-      case .bordered(let rounding, let c, _):
+      case let .bordered(rounding, c, _):
         return .bordered(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
-      case .gradient(let from, let to, let rounding, _):
+      case let .gradient(from, to, rounding, _):
         return .gradient(
           from: from.withAlphaComponent(Self.highlightedAlpha),
           to: to.withAlphaComponent(Self.highlightedAlpha),
           rounding: rounding,
           alpha: Self.highlightedAlpha
         )
-      case .titleOnly(let c, _):
+      case let .titleOnly(c, _):
         if let color = c {
           return .titleOnly(color: color, alpha: 1)
         } else {
@@ -83,13 +83,13 @@ extension UIButton {
 
     var backgroundImage: UIImage? {
       switch self {
-      case .gradient(let from, let to, let rounding, let alpha):
+      case let .gradient(from, to, rounding, alpha):
         return UIImage.gradientImage(
           colors: [from.withAlphaComponent(alpha), to.withAlphaComponent(alpha)],
           rounding: rounding,
           insets: rounding.insets
         )
-      case .bordered(let rounding, let c, let alpha):
+      case let .bordered(rounding, c, alpha):
         return UIImage.resizableImage(
           fill: .clear,
           stroke: (
@@ -100,7 +100,7 @@ extension UIButton {
           insets: rounding.insets,
           alpha: alpha
         )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
-      case .filled(let rounding, let c, let alpha):
+      case let .filled(rounding, c, alpha):
         return UIImage.resizableImage(
           fill: c ?? .black,
           stroke: nil,
@@ -116,7 +116,7 @@ extension UIButton {
     var strokeWidth: CGFloat {
       switch self {
       case .titleOnly,
-         .gradient:
+           .gradient:
         return 0
       default:
         return 1
@@ -155,40 +155,27 @@ extension UIButton {
         return .white
       }
     }
-
-    public static func == (_ lhs: Style, _ rhs: Style) -> Bool {
-      switch (lhs, rhs) {
-      case (.gradient(let lhsColors), .gradient(let rhsColors)):
-        return lhsColors == rhsColors
-      case (.bordered, .bordered),
-         (.filled, .filled),
-         (.titleOnly, .titleOnly):
-        return true
-      default:
-        return false
-      }
-    }
   }
 
   @available(iOS 13.0, *)
-  public convenience init(style: Style, size: Size = .big, type: UIButton.ButtonType = .system) {
+  convenience init(style: Style, size: Size = .big, type: UIButton.ButtonType = .system) {
     self.init(type: type)
     setStyle(style, size: size)
   }
 
   @available(iOS, obsoleted: 13)
-  public convenience init(style: Style, size: Size = .big, theme: Theme, type: UIButton.ButtonType = .system) {
+  convenience init(style: Style, size: Size = .big, theme: Theme, type: UIButton.ButtonType = .system) {
     self.init(type: type)
 
     setStyle(style, size: size, theme: theme)
   }
 
-  var configurableStates: [UIControl.State] {
+  internal var configurableStates: [UIControl.State] {
     return [.normal, .selected, .highlighted, .disabled]
   }
 
   @available(iOS, obsoleted: 13)
-  public func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
+  func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
     configureCommonAttributes(style, size: size)
     if theme == .extraLight {
       setBackgroundImage(style.backgroundImage?.withAlpha(0.4), for: .normal)
@@ -199,7 +186,7 @@ extension UIButton {
   }
 
   @available(iOS 13, *)
-  public func setStyle(_ style: Style, size: Size = .big) {
+  func setStyle(_ style: Style, size: Size = .big) {
     configureCommonAttributes(style, size: size)
     configurableStates.forEach {
       setTitleColor(style.titleColor(state: $0), for: $0)
