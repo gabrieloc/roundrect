@@ -120,7 +120,7 @@ extension UIButton.Style: RawRepresentable {
     switch self {
     case let .gradient(from, to, cornerRadius, _):
       return "gradient \(cornerRadius) \(from)-\(to)"
-    case let .bordered(rounding, _, alpha):
+    case let .bordered(rounding, _, _, alpha):
       return "bordered \(rounding) \(alpha)"
     case let .filled(rounding, _, alpha):
       return "filled \(rounding) \(alpha)"

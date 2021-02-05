@@ -22,15 +22,15 @@ public extension UIButton {
     static let disabledAlpha: CGFloat = 0.5
 
     case gradient(from: UIColor, to: UIColor, rounding: Rounding, alpha: CGFloat)
-    case bordered(rounding: Rounding, color: UIColor? = nil, alpha: CGFloat = 1)
+    case bordered(rounding: Rounding, lineWidth: CGFloat = 1, color: UIColor? = nil, alpha: CGFloat = 1)
     case filled(rounding: Rounding, color: UIColor? = nil, alpha: CGFloat = 1)
     case titleOnly(color: UIColor? = nil, alpha: CGFloat = 1)
 
     var rounding: Rounding? {
       switch self {
-      case let .bordered(rounding, _, _), let
-        .filled(rounding, _, _), let
-        .gradient(_, _, rounding, _):
+      case let .bordered(rounding, _, _, _),
+           let .filled(rounding, _, _),
+           let .gradient(_, _, rounding, _):
         return rounding
       case .titleOnly:
         return nil
@@ -46,9 +46,9 @@ public extension UIButton {
 
     var disabled: Style {
       switch self {
-      case let .filled(rounding, _, _), let
-        .bordered(rounding, _, _), let
-        .gradient(_, _, rounding, _):
+      case let .filled(rounding, _, _),
+           let .bordered(rounding, _, _, _),
+           let .gradient(_, _, rounding, _):
         return .filled(rounding: rounding, color: disabledColor, alpha: 1)
       case let .titleOnly(c, _):
         if let color = c {
@@ -63,8 +63,8 @@ public extension UIButton {
       switch self {
       case let .filled(rounding, c, _):
         return .filled(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
-      case let .bordered(rounding, c, _):
-        return .bordered(rounding: rounding, color: c, alpha: Self.highlightedAlpha)
+      case let .bordered(rounding, lineWidth, c, _):
+        return .bordered(rounding: rounding, lineWidth: lineWidth, color: c, alpha: Self.highlightedAlpha)
       case let .gradient(from, to, rounding, _):
         return .gradient(
           from: from.withAlphaComponent(Self.highlightedAlpha),
@@ -89,12 +89,12 @@ public extension UIButton {
           rounding: rounding,
           insets: rounding.insets
         )
-      case let .bordered(rounding, c, alpha):
+      case let .bordered(rounding, lineWidth, c, alpha):
         return UIImage.resizableImage(
           fill: .clear,
           stroke: (
             color: c ?? .black,
-            width: strokeWidth
+            width: lineWidth
           ),
           rounding: rounding,
           insets: rounding.insets,
@@ -110,16 +110,6 @@ public extension UIButton {
         )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
       case .titleOnly:
         return nil
-      }
-    }
-
-    var strokeWidth: CGFloat {
-      switch self {
-      case .titleOnly,
-           .gradient:
-        return 0
-      default:
-        return 1
       }
     }
 
