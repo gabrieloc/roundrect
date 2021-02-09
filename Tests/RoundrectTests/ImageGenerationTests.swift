@@ -90,10 +90,7 @@ class ImageGenerationTests: XCTestCase {
       ),
       rounding: .some(
         corners: [.bottomLeft, .topRight, .bottomRight],
-        radii: CGSize(
-          width: 10,
-          height: 10
-        )
+        radii: 10
       )
     )!
     verifyImage(image)
@@ -125,12 +122,38 @@ class ImageGenerationTests: XCTestCase {
       colors: [.blue, .red],
       rounding: .some(
         corners: [.bottomLeft, .topRight, .bottomRight],
-        radii: CGSize(
-          width: 10,
-          height: 10
-        )
+        radii: 10
       ),
       insets: .zero
+    )!
+    verifyImage(image)
+  }
+
+  func testConditionalStrokesOnFlatEdge() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 2
+      ),
+      strokeEdges: [.top, .left, .right],
+      rounding: .some(
+        corners: [.topLeft, .topRight],
+        radii: 10
+      )
+    )!
+    verifyImage(image)
+  }
+
+  func testConditionalStrokesOnRoundEdge() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 2  
+      ),
+      strokeEdges: [.top, .left, .right],
+      rounding: .all(10)
     )!
     verifyImage(image)
   }

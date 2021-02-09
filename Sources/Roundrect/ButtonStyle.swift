@@ -193,7 +193,7 @@ public extension UIButton {
 
     if let rounding = style.rounding {
       contentEdgeInsets = UIEdgeInsets(
-        x: rounding.radii.height,
+        x: rounding.radii,
         y: size == .small ? 10 : 16
       )
     }

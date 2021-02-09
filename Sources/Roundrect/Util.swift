@@ -8,12 +8,12 @@
 
 import UIKit
 
-extension UIEdgeInsets {
-  public init(x: CGFloat, y: CGFloat) {
+public extension UIEdgeInsets {
+  init(x: CGFloat, y: CGFloat) {
     self.init(top: y, left: x, bottom: y, right: x)
   }
 
-  public init(equalInsets: CGFloat) {
+  init(equalInsets: CGFloat) {
     self.init(top: equalInsets, left: equalInsets, bottom: equalInsets, right: equalInsets)
   }
 }
@@ -27,4 +27,106 @@ extension UIColor {
     }
     return UIColor(white: grayscale, alpha: alpha)
   }
+}
+
+extension CGRect {
+  func point(at corner: UIRectCorner) -> CGPoint? {
+    switch corner {
+    case .topLeft:
+      return CGPoint(x: minX, y: minY)
+    case .bottomLeft:
+      return CGPoint(x: minX, y: maxY)
+    case .bottomRight:
+      return CGPoint(x: maxX, y: maxY)
+    case .topRight:
+      return CGPoint(x: maxX, y: minY)
+    default:
+      return nil
+    }
+  }
+}
+
+extension UIRectEdge {
+  var anticlockwiseCorners: (origin: UIRectCorner, destination: UIRectCorner)? {
+    switch self {
+    case .top:
+      return (.topRight, .topLeft)
+    case .left:
+      return (.topLeft, .bottomLeft)
+    case .bottom:
+      return (.bottomLeft, .bottomRight)
+    case .right:
+      return (.bottomRight, .topRight)
+    default:
+      return nil
+    }
+  }
+}
+
+public struct OptionSetIterator<Element: OptionSet>: IteratorProtocol where Element.RawValue == Int {
+  private let value: Element
+
+  public init(element: Element) {
+    value = element
+  }
+
+  private lazy var remainingBits = value.rawValue
+  private var bitMask = 1
+
+  public mutating func next() -> Element? {
+    while remainingBits != 0 {
+      defer { bitMask = bitMask &* 2 }
+      if remainingBits & bitMask != 0 {
+        remainingBits = remainingBits & ~bitMask
+        return Element(rawValue: bitMask)
+      }
+    }
+    return nil
+  }
+}
+
+extension CGPoint {
+  static func - (lhs: Self, rhs: Self) -> Self {
+    Self(x: lhs.x - rhs.x, y: lhs.y - rhs.y)
+  }
+
+  static func + (lhs: Self, rhs: Self) -> Self {
+    Self(x: lhs.x + rhs.x, y: lhs.y + rhs.y)
+  }
+
+  static func / (lhs: Self, rhs: CGFloat) -> Self {
+    Self(x: lhs.x / rhs, y: lhs.y / rhs)
+  }
+
+  static func * (lhs: Self, rhs: CGFloat) -> Self {
+    Self(x: lhs.x * rhs, y: lhs.y * rhs)
+  }
+
+  static func * (lhs: Self, rhs: Self) -> Self {
+    Self(x: lhs.x * rhs.x, y: lhs.y * rhs.y)
+  }
+
+  var magnitude: CGFloat {
+    sqrt(x * x + y * y)
+  }
+
+  var normalized: Self {
+    self / magnitude
+  }
+
+  var flipped: Self {
+    Self(x: y, y: x)
+  }
+}
+
+func lerp(_ lhs: CGPoint, _ rhs: CGPoint, _ t: CGFloat) -> CGPoint {
+  lhs + (rhs - lhs) * t
+}
+
+func rad2deg<T>(_ number: T) -> T where T: FloatingPoint {
+  number * 180 / .pi
+}
+
+extension CGFloat {
+  static let tau = CGFloat.pi * 2
 }

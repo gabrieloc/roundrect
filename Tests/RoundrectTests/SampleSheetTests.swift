@@ -42,4 +42,3 @@ class SampleSheetTests: XCTestCase {
     assertSnapshot(matching: sampleSheet, as: .image)
   }
 }
-
