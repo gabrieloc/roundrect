@@ -80,6 +80,19 @@ class ImageGenerationTests: XCTestCase {
     )!
     verifyImage(image)
   }
+  
+  
+  func testRoundedThickStrokedImage() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 4
+      ),
+      rounding: .all(10)
+    )!
+    verifyImage(image)
+  }
 
   func testConditionallyRoundedStrokedImage() {
     let image = UIImage(
@@ -129,7 +142,7 @@ class ImageGenerationTests: XCTestCase {
     verifyImage(image)
   }
 
-  func testConditionalStrokesOnFlatEdge() {
+  func testSingleConditionalStrokeOnFlatEdge() {
     let image = UIImage(
       fill: .blue,
       stroke: (
@@ -145,12 +158,38 @@ class ImageGenerationTests: XCTestCase {
     verifyImage(image)
   }
 
-  func testConditionalStrokesOnRoundEdge() {
+  func testMultipleConditionalStrokesNoRounding() {
     let image = UIImage(
       fill: .blue,
       stroke: (
         color: .red,
         width: 2
+      ),
+      strokeEdges: [.left, .right],
+      rounding: .none
+    )!
+    verifyImage(image)
+  }
+
+  func testMultipleConditionalStrokesOnFlatEdge() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 4
+      ),
+      strokeEdges: [.left, .right, .bottom],
+      rounding: .some(corners: [.bottomLeft], radii: 10)
+    )!
+    verifyImage(image)
+  }
+
+  func testConditionalStrokesOnRoundEdge() {
+    let image = UIImage(
+      fill: .blue,
+      stroke: (
+        color: .red,
+        width: 4
       ),
       strokeEdges: [.top, .left, .right],
       rounding: .all(10)

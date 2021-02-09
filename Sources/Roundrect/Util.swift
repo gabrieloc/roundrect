@@ -39,6 +39,10 @@ extension UIColor {
 }
 
 extension CGRect {
+  var center: CGPoint {
+    origin + CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+  }
+
   func point(at corner: UIRectCorner) -> CGPoint? {
     switch corner {
     case .topLeft:

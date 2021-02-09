@@ -72,12 +72,20 @@ public extension UIImage {
     rounding: Rounding? = nil
   ) {
     let strokeWidth = stroke?.width ?? 0
-    let fillPath = UIBezierPath.fillPath(
-      rounding: rounding,
-      strokeWidth: strokeWidth
+    let rect = CGRect(
+      origin: .zero,
+      size: CGSize(
+        width: 1 + (rounding?.radii ?? 0) * 2,
+        height: 1 + (rounding?.radii ?? 0) * 2
+      )
+    ).inset(
+      by: UIEdgeInsets(
+        value: strokeWidth * 0.5,
+        edges: strokeEdges
+      )
     )
 
-    let assetSize = fillPath.bounds.inset(
+    let assetSize = rect.inset(
       by: UIEdgeInsets(
         value: strokeWidth * -0.5,
         edges: strokeEdges
@@ -86,14 +94,19 @@ public extension UIImage {
 
     UIGraphicsBeginImageContextWithOptions(assetSize, false, UIScreen.main.scale)
 
+    let fillPath = UIBezierPath.fillPath(
+      in: rect,
+      rounding: rounding
+    )
     fill.setFill()
     fillPath.fill()
 
     if let strokeColor = stroke?.color, strokeWidth > 0 {
       let strokePath = UIBezierPath.strokePath(
-        strokeWidth: strokeWidth,
+        in: rect,
         strokeEdges: strokeEdges,
-        rounding: rounding
+        rounding: rounding,
+        strokeWidth: strokeWidth
       )
       strokePath.lineWidth = strokeWidth
       strokeColor.setStroke()
@@ -189,26 +202,13 @@ public extension UIImage {
 }
 
 public extension UIBezierPath {
-  static func fillPath(rounding: Rounding?, strokeWidth: CGFloat) -> Self {
-    let size = CGSize(
-      width: 1 + (rounding?.radii ?? 0) * 2,
-      height: 1 + (rounding?.radii ?? 0) * 2
-    )
-    let rect = CGRect(
-      origin: .zero,
-      size: size
-    ).insetBy(
-      dx: -strokeWidth * 0.5,
-      dy: -strokeWidth * 0.5
-    ).offsetBy(
-      dx: strokeWidth,
-      dy: strokeWidth
-    )
-
+  static func fillPath(
+    in rect: CGRect,
+    rounding: Rounding?
+  ) -> Self {
     guard let rounding = rounding else {
       return .init(rect: rect)
     }
-
     return .init(
       roundedRect: rect,
       byRoundingCorners: rounding.corners,
@@ -219,7 +219,7 @@ public extension UIBezierPath {
     )
   }
 
-  func addArcSegment(for edge: UIRectEdge, rounding: Rounding?, rect: CGRect) {
+  func addArcSegment(for edge: UIRectEdge, rounding: Rounding?, rect: CGRect, center: CGPoint) {
     guard
       let corners = edge.anticlockwiseCorners,
       let origin = rect.point(at: corners.origin),
@@ -227,10 +227,7 @@ public extension UIBezierPath {
     else {
       return
     }
-
     let direction = (destination - origin).normalized
-    let center = rect.origin + CGPoint(x: rect.size.width * 0.5, y: rect.size.height * 0.5)
-
     func rad(_ p: CGPoint) -> CGFloat {
       let rad = atan2(p.x, p.y)
       var angle = (rad - .pi * 0.5) * -1
@@ -278,36 +275,31 @@ public extension UIBezierPath {
   }
 
   static func strokePath(
-    strokeWidth: CGFloat,
+    in rect: CGRect,
     strokeEdges: UIRectEdge,
-    rounding: Rounding?
+    rounding: Rounding?,
+    strokeWidth: CGFloat
   ) -> UIBezierPath {
-    let rect = CGRect(
-      origin: .zero,
-      size: CGSize(
-        width: 1 + (rounding?.radii ?? 0) * 2,
-        height: 1 + (rounding?.radii ?? 0) * 2
-      )
-    ).insetBy(
-      dx: -strokeWidth * 0.5,
-      dy: -strokeWidth * 0.5
-    ).offsetBy(
-      dx: strokeWidth,
-      dy: strokeWidth
-    )
-
     let path = UIBezierPath()
+
+    // recalculate the center to ensure segments align
+    var center = rect.center
+    center.y += strokeEdges.contains(.top) ? 0 : strokeWidth * 0.25
+    center.y += strokeEdges.contains(.bottom) ? 0 : strokeWidth * -0.25
+    center.x += strokeEdges.contains(.right) ? 0 : strokeWidth * 0.25
+    center.x += strokeEdges.contains(.left) ? 0 : strokeWidth * -0.25
+
     if strokeEdges.contains(.top) {
-      path.addArcSegment(for: .top, rounding: rounding, rect: rect)
+      path.addArcSegment(for: .top, rounding: rounding, rect: rect, center: center)
     }
     if strokeEdges.contains(.left) {
-      path.addArcSegment(for: .left, rounding: rounding, rect: rect)
+      path.addArcSegment(for: .left, rounding: rounding, rect: rect, center: center)
     }
     if strokeEdges.contains(.bottom) {
-      path.addArcSegment(for: .bottom, rounding: rounding, rect: rect)
+      path.addArcSegment(for: .bottom, rounding: rounding, rect: rect, center: center)
     }
     if strokeEdges.contains(.right) {
-      path.addArcSegment(for: .right, rounding: rounding, rect: rect)
+      path.addArcSegment(for: .right, rounding: rounding, rect: rect, center: center)
     }
     return path
   }
