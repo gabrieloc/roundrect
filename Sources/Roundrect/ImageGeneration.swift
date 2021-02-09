@@ -77,16 +77,14 @@ public extension UIImage {
       strokeWidth: strokeWidth
     )
 
-    let contextRect = fillPath.bounds.insetBy(
-      dx: -strokeWidth * 0.5,
-      dy: -strokeWidth * 0.5
-    )
+    let assetSize = fillPath.bounds.inset(
+      by: UIEdgeInsets(
+        value: strokeWidth * -0.5,
+        edges: strokeEdges
+      )
+    ).size
 
-    UIGraphicsBeginImageContextWithOptions(
-      contextRect.size,
-      false,
-      UIScreen.main.scale
-    )
+    UIGraphicsBeginImageContextWithOptions(assetSize, false, UIScreen.main.scale)
 
     fill.setFill()
     fillPath.fill()

@@ -16,6 +16,15 @@ public extension UIEdgeInsets {
   init(equalInsets: CGFloat) {
     self.init(top: equalInsets, left: equalInsets, bottom: equalInsets, right: equalInsets)
   }
+
+  init(value: CGFloat, edges: UIRectEdge) {
+    self.init(
+      top: edges.contains(.top) ? value : 0,
+      left: edges.contains(.left) ? value : 0,
+      bottom: edges.contains(.bottom) ? value : 0,
+      right: edges.contains(.right) ? value : 0
+    )
+  }
 }
 
 extension UIColor {

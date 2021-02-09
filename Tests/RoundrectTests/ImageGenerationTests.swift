@@ -150,7 +150,7 @@ class ImageGenerationTests: XCTestCase {
       fill: .blue,
       stroke: (
         color: .red,
-        width: 2  
+        width: 2
       ),
       strokeEdges: [.top, .left, .right],
       rounding: .all(10)
