@@ -143,3 +143,18 @@ func rad2deg<T>(_ number: T) -> T where T: FloatingPoint {
 extension CGFloat {
   static let tau = CGFloat.pi * 2
 }
+
+@available(iOS 13.0, *)
+extension UITraitCollection {
+  static let lightInterfaceStyle = UITraitCollection.current.withUserInterfaceStyle(.light)
+  static let darkInterfaceStyle = UITraitCollection.current.withUserInterfaceStyle(.dark)
+
+  func withUserInterfaceStyle(_ style: UIUserInterfaceStyle) -> UITraitCollection {
+    UITraitCollection(
+      traitsFrom: [
+        self,
+        UITraitCollection(userInterfaceStyle: style),
+      ]
+    )
+  }
+}

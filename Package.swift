@@ -1,4 +1,4 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -15,7 +15,11 @@ let package = Package(
     ),
   ],
   dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.8.0"),
+    .package(
+      name: "SnapshotTesting",
+      url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
+      from: "1.8.0"
+    ),
   ],
   targets: [
     .target(
@@ -24,7 +28,11 @@ let package = Package(
     ),
     .testTarget(
       name: "RoundrectTests",
-      dependencies: ["Roundrect", "SnapshotTesting"]
+      dependencies: ["Roundrect", "SnapshotTesting"],
+      resources: [
+        .copy("Assets"),
+        .copy("__Snapshots__"),
+      ]
     ),
   ]
 )

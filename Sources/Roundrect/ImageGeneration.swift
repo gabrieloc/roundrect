@@ -71,59 +71,56 @@ public extension UIImage {
     strokeEdges: UIRectEdge = .all,
     rounding: Rounding? = nil
   ) {
-    let strokeWidth = stroke?.width ?? 0
-    let rect = CGRect(
-      origin: .zero,
-      size: CGSize(
-        width: 1 + (rounding?.radii ?? 0) * 2,
-        height: 1 + (rounding?.radii ?? 0) * 2
+    let (resolvedFill, resolvedStroke) = { () -> (UIColor, (UIColor, CGFloat)?) in
+      guard #available(iOS 13.0, *) else {
+        return (fill, stroke)
+      }
+      return (
+        fill.resolvedColor(with: .lightInterfaceStyle),
+        stroke.map {
+          ($0.color.resolvedColor(with: .lightInterfaceStyle), $0.width)
+        }
       )
-    ).inset(
-      by: UIEdgeInsets(
-        value: strokeWidth * 0.5,
-        edges: strokeEdges
-      )
-    )
+    }()
 
-    let assetSize = rect.inset(
-      by: UIEdgeInsets(
-        value: strokeWidth * -0.5,
-        edges: strokeEdges
-      )
-    ).size
-
-    UIGraphicsBeginImageContextWithOptions(assetSize, false, UIScreen.main.scale)
-
-    let fillPath = UIBezierPath.fillPath(
-      in: rect,
+    guard let lightImage = UIImage.fromColor(
+      fill: resolvedFill,
+      stroke: resolvedStroke,
+      strokeEdges: strokeEdges,
       rounding: rounding
-    )
-    fill.setFill()
-    fillPath.fill()
-
-    if let strokeColor = stroke?.color, strokeWidth > 0 {
-      let strokePath = UIBezierPath.strokePath(
-        in: rect,
-        strokeEdges: strokeEdges,
-        rounding: rounding,
-        strokeWidth: strokeWidth
-      )
-      strokePath.lineWidth = strokeWidth
-      strokeColor.setStroke()
-      strokePath.stroke()
-    }
-    let image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-
-    guard let cgImage = image?.cgImage else {
+    )?.cgImage else {
       return nil
     }
 
     self.init(
-      cgImage: cgImage,
+      cgImage: lightImage,
       scale: UIScreen.main.scale,
       orientation: .up
     )
+
+    guard #available(iOS 13.0, *) else {
+      return
+    }
+
+    let darkTraitCollection = UITraitCollection(
+      userInterfaceStyle: .dark
+    )
+
+    if let darkImage = UIImage.fromColor(
+      fill: fill.resolvedColor(with: darkTraitCollection),
+      stroke: stroke.map { ($0.color.resolvedColor(with: darkTraitCollection), $0.width) },
+      strokeEdges: strokeEdges,
+      rounding: rounding
+    )?.cgImage {
+      imageAsset?.register(
+        .init(
+          cgImage: darkImage,
+          scale: UIScreen.main.scale,
+          orientation: .up
+        ),
+        with: .darkInterfaceStyle
+      )
+    }
   }
 
   static func resizableImage(
@@ -168,7 +165,61 @@ public extension UIImage {
       .withRenderingMode(renderingMode)
   }
 
-  static func gradientImage(colors: [UIColor], rounding: Rounding? = nil, insets: UIEdgeInsets, stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))) -> UIImage? {
+  static func gradientImage(
+    colors: [UIColor],
+    rounding: Rounding? = nil,
+    insets: UIEdgeInsets? = nil,
+    stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))
+  ) -> UIImage? {
+    let capInsets: UIEdgeInsets = insets ?? rounding?.insets ?? .zero
+    guard let lightImage = UIImage.imageWithLayer(
+      CALayer.gradient(
+        colors: colors.map {
+          guard #available(iOS 13.0, *) else {
+            return $0
+          }
+          return $0.resolvedColor(with: .lightInterfaceStyle)
+        },
+        rounding: rounding,
+        insets: insets ?? .zero,
+        stops: stops
+      )
+    )?.resizableImage(
+      withCapInsets: capInsets,
+      resizingMode: .stretch
+    ) else {
+      return nil
+    }
+    guard
+      #available(iOS 13.0, *),
+      let darkImage = UIImage.imageWithLayer(
+        .gradient(
+          colors: colors.map {
+            $0.resolvedColor(with: .darkInterfaceStyle)
+          },
+          rounding: rounding,
+          insets: insets ?? .zero,
+          stops: stops
+        )
+      )?.resizableImage(
+        withCapInsets: capInsets,
+        resizingMode: .stretch
+      )
+    else {
+      return lightImage
+    }
+    lightImage.imageAsset?.register(darkImage, with: .darkInterfaceStyle)
+    return lightImage
+  }
+}
+
+private extension CALayer {
+  static func gradient(
+    colors: [UIColor],
+    rounding: Rounding?,
+    insets: UIEdgeInsets,
+    stops: (start: CGPoint, end: CGPoint)
+  ) -> CALayer {
     let rect = CGRect(
       origin: .zero,
       size: CGSize(
@@ -177,11 +228,11 @@ public extension UIImage {
       )
     )
 
-    let gradient = CAGradientLayer()
-    gradient.frame = rect
-    gradient.startPoint = stops.start
-    gradient.endPoint = stops.end
-    gradient.colors = colors.map { $0.cgColor }
+    let layer = CAGradientLayer()
+    layer.frame = rect
+    layer.startPoint = stops.start
+    layer.endPoint = stops.end
+    layer.colors = colors.map { $0.cgColor }
 
     if let rounding = rounding {
       let maskLayer = CAShapeLayer()
@@ -191,13 +242,10 @@ public extension UIImage {
         cornerRadii: CGSize(width: rounding.radii, height: rounding.radii)
       ).cgPath
       maskLayer.frame = rect
-      gradient.mask = maskLayer
+      layer.mask = maskLayer
     }
 
-    return UIImage.imageWithLayer(gradient)?.resizableImage(
-      withCapInsets: insets,
-      resizingMode: .stretch
-    )
+    return layer
   }
 }
 
@@ -302,5 +350,60 @@ public extension UIBezierPath {
       path.addArcSegment(for: .right, rounding: rounding, rect: rect, center: center)
     }
     return path
+  }
+}
+
+private extension UIImage {
+  static func fromColor(
+    fill: UIColor,
+    stroke: (color: UIColor, width: CGFloat)? = nil,
+    strokeEdges: UIRectEdge = .all,
+    rounding: Rounding? = nil
+  ) -> UIImage? {
+    let strokeWidth = stroke?.width ?? 0
+    let rect = CGRect(
+      origin: .zero,
+      size: CGSize(
+        width: 1 + (rounding?.radii ?? 0) * 2,
+        height: 1 + (rounding?.radii ?? 0) * 2
+      )
+    ).inset(
+      by: UIEdgeInsets(
+        value: strokeWidth * 0.5,
+        edges: strokeEdges
+      )
+    )
+
+    let assetSize = rect.inset(
+      by: UIEdgeInsets(
+        value: strokeWidth * -0.5,
+        edges: strokeEdges
+      )
+    ).size
+
+    UIGraphicsBeginImageContextWithOptions(assetSize, false, UIScreen.main.scale)
+
+    let fillPath = UIBezierPath.fillPath(
+      in: rect,
+      rounding: rounding
+    )
+    fill.setFill()
+    fillPath.fill()
+
+    if let strokeColor = stroke?.color, strokeWidth > 0 {
+      let strokePath = UIBezierPath.strokePath(
+        in: rect,
+        strokeEdges: strokeEdges,
+        rounding: rounding,
+        strokeWidth: strokeWidth
+      )
+      strokePath.lineWidth = strokeWidth
+      strokeColor.setStroke()
+      strokePath.stroke()
+    }
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+
+    return image
   }
 }
