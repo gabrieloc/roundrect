@@ -81,13 +81,14 @@ public extension UIButton {
       }
     }
 
-    var backgroundImage: UIImage? {
+    func backgroundImage(traitCollection: UITraitCollection) -> UIImage? {
       switch self {
       case let .gradient(from, to, rounding, alpha):
         return UIImage.gradientImage(
           colors: [from.withAlphaComponent(alpha), to.withAlphaComponent(alpha)],
           rounding: rounding,
-          insets: rounding.insets
+          insets: rounding.insets,
+          traitCollection: traitCollection
         )
       case let .bordered(rounding, lineWidth, c, alpha):
         return UIImage.resizableImage(
@@ -98,7 +99,8 @@ public extension UIButton {
           ),
           rounding: rounding,
           insets: rounding.insets,
-          alpha: alpha
+          alpha: alpha,
+          traitCollection: traitCollection
         )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
       case let .filled(rounding, c, alpha):
         return UIImage.resizableImage(
@@ -106,7 +108,8 @@ public extension UIButton {
           stroke: nil,
           rounding: rounding,
           insets: rounding.insets,
-          alpha: alpha
+          alpha: alpha,
+          traitCollection: traitCollection
         )?.withRenderingMode(c == nil ? .alwaysTemplate : .alwaysOriginal)
       case .titleOnly:
         return nil
@@ -168,7 +171,7 @@ public extension UIButton {
   func setStyle(_ style: Style, size: Size = .big, theme: Theme) {
     configureCommonAttributes(style, size: size)
     if theme == .extraLight {
-      setBackgroundImage(style.backgroundImage?.withAlpha(0.4), for: .normal)
+      setBackgroundImage(style.backgroundImage(traitCollection: traitCollection)?.withAlpha(0.4), for: .normal)
     }
     configurableStates.forEach {
       setTitleColor(style.titleColor(state: $0, theme: theme), for: $0)
@@ -186,10 +189,10 @@ public extension UIButton {
   private func configureCommonAttributes(_ style: Style, size: Size) {
     backgroundColor = .clear
 
-    setBackgroundImage(style.backgroundImage, for: .normal)
-    setBackgroundImage(style.highlighted.backgroundImage, for: .selected)
-    setBackgroundImage(style.highlighted.backgroundImage, for: .highlighted)
-    setBackgroundImage(style.disabled.backgroundImage?.withRenderingMode(.alwaysOriginal), for: .disabled)
+    setBackgroundImage(style.backgroundImage(traitCollection: traitCollection), for: .normal)
+    setBackgroundImage(style.highlighted.backgroundImage(traitCollection: traitCollection), for: .selected)
+    setBackgroundImage(style.highlighted.backgroundImage(traitCollection: traitCollection), for: .highlighted)
+    setBackgroundImage(style.disabled.backgroundImage(traitCollection: traitCollection)?.withRenderingMode(.alwaysOriginal), for: .disabled)
 
     if let rounding = style.rounding {
       contentEdgeInsets = UIEdgeInsets(

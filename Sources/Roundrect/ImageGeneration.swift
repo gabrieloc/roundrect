@@ -69,16 +69,17 @@ public extension UIImage {
     fill: UIColor,
     stroke: (color: UIColor, width: CGFloat)? = nil,
     strokeEdges: UIRectEdge = .all,
-    rounding: Rounding? = nil
+    rounding: Rounding? = nil,
+    traitCollection: UITraitCollection
   ) {
     let (resolvedFill, resolvedStroke) = { () -> (UIColor, (UIColor, CGFloat)?) in
       guard #available(iOS 13.0, *) else {
         return (fill, stroke)
       }
       return (
-        fill.resolvedColor(with: .lightInterfaceStyle),
+        fill.resolvedColor(with: traitCollection.withUserInterfaceStyle(.light)),
         stroke.map {
-          ($0.color.resolvedColor(with: .lightInterfaceStyle), $0.width)
+          ($0.color.resolvedColor(with: traitCollection.withUserInterfaceStyle(.light)), $0.width)
         }
       )
     }()
@@ -102,13 +103,9 @@ public extension UIImage {
       return
     }
 
-    let darkTraitCollection = UITraitCollection(
-      userInterfaceStyle: .dark
-    )
-
     if let darkImage = UIImage.fromColor(
-      fill: fill.resolvedColor(with: darkTraitCollection),
-      stroke: stroke.map { ($0.color.resolvedColor(with: darkTraitCollection), $0.width) },
+      fill: fill.resolvedColor(with: traitCollection.withUserInterfaceStyle(.dark)),
+      stroke: stroke.map { ($0.color.resolvedColor(with: traitCollection.withUserInterfaceStyle(.dark)), $0.width) },
       strokeEdges: strokeEdges,
       rounding: rounding
     )?.cgImage {
@@ -118,7 +115,7 @@ public extension UIImage {
           scale: UIScreen.main.scale,
           orientation: .up
         ),
-        with: .darkInterfaceStyle
+        with: traitCollection.withUserInterfaceStyle(.dark)
       )
     }
   }
@@ -129,13 +126,15 @@ public extension UIImage {
     strokeEdges: UIRectEdge = .all,
     rounding: Rounding? = nil,
     insets: UIEdgeInsets? = nil,
-    alpha: CGFloat = 1
+    alpha: CGFloat = 1,
+    traitCollection: UITraitCollection
   ) -> UIImage? {
     guard let image = UIImage(
       fill: fill,
       stroke: stroke,
       strokeEdges: strokeEdges,
-      rounding: rounding
+      rounding: rounding,
+      traitCollection: traitCollection
     ) else {
       return nil
     }
@@ -169,7 +168,8 @@ public extension UIImage {
     colors: [UIColor],
     rounding: Rounding? = nil,
     insets: UIEdgeInsets? = nil,
-    stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0))
+    stops: (start: CGPoint, end: CGPoint) = (CGPoint(x: 0, y: 0), CGPoint(x: 1, y: 0)),
+    traitCollection: UITraitCollection
   ) -> UIImage? {
     let capInsets: UIEdgeInsets = insets ?? rounding?.insets ?? .zero
     guard let lightImage = UIImage.imageWithLayer(
@@ -178,7 +178,7 @@ public extension UIImage {
           guard #available(iOS 13.0, *) else {
             return $0
           }
-          return $0.resolvedColor(with: .lightInterfaceStyle)
+          return $0.resolvedColor(with: traitCollection.withUserInterfaceStyle(.light))
         },
         rounding: rounding,
         insets: insets ?? .zero,
@@ -195,7 +195,7 @@ public extension UIImage {
       let darkImage = UIImage.imageWithLayer(
         .gradient(
           colors: colors.map {
-            $0.resolvedColor(with: .darkInterfaceStyle)
+            $0.resolvedColor(with: traitCollection.withUserInterfaceStyle(.dark))
           },
           rounding: rounding,
           insets: insets ?? .zero,
@@ -208,7 +208,7 @@ public extension UIImage {
     else {
       return lightImage
     }
-    lightImage.imageAsset?.register(darkImage, with: .darkInterfaceStyle)
+    lightImage.imageAsset?.register(darkImage, with: traitCollection.withUserInterfaceStyle(.dark))
     return lightImage
   }
 }

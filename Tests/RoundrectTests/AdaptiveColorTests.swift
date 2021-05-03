@@ -18,7 +18,8 @@ class AdaptiveColorTests: XCTestCase {
         UIImage(
           fill: .adaptive1,
           stroke: (.adaptive2, 1),
-          rounding: .all(10)
+          rounding: .all(10),
+          traitCollection: UITraitCollection.current.withUserInterfaceStyle(.light)
         )
       ),
       as: .image(style: .light)
@@ -31,7 +32,8 @@ class AdaptiveColorTests: XCTestCase {
         UIImage(
           fill: .adaptive1,
           stroke: (.adaptive2, 1),
-          rounding: .all(10)
+          rounding: .all(10),
+          traitCollection: UITraitCollection.current.withUserInterfaceStyle(.dark)
         )
       ),
       as: .image(style: .dark)
@@ -43,7 +45,8 @@ class AdaptiveColorTests: XCTestCase {
       matching: try XCTUnwrap(
         UIImage.gradientImage(
           colors: [.adaptive1, .adaptive2],
-          rounding: .all(10)
+          rounding: .all(10),
+          traitCollection: UITraitCollection.current.withUserInterfaceStyle(.light)
         )
       ),
       as: .image(style: .light)
@@ -55,7 +58,8 @@ class AdaptiveColorTests: XCTestCase {
       matching: try XCTUnwrap(
         UIImage.gradientImage(
           colors: [.adaptive1, .adaptive2],
-          rounding: .all(10)
+          rounding: .all(10),
+          traitCollection: UITraitCollection.current.withUserInterfaceStyle(.dark)
         )
       ),
       as: .image(style: .dark)

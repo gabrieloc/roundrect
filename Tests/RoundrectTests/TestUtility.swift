@@ -34,3 +34,9 @@ extension UIColor {
     compatibleWith: nil
   )!
 }
+
+@available(iOS 13.0, *)
+extension UITraitCollection {
+  static let lightInterfaceStyle = UITraitCollection.current.withUserInterfaceStyle(.light)
+  static let darkInterfaceStyle = UITraitCollection.current.withUserInterfaceStyle(.dark)
+}

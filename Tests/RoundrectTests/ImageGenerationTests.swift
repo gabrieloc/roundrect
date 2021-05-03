@@ -10,8 +10,8 @@ import SnapshotTesting
 import XCTest
 @testable import Roundrect
 
+@available(iOS 13.0, *)
 class ImageGenerationTests: XCTestCase {
-
   func testViewRasterization() {
     let view = UILabel()
     view.text = "👹"
@@ -23,7 +23,8 @@ class ImageGenerationTests: XCTestCase {
 
   func testFilledImage() {
     let image = UIImage(
-      fill: .blue
+      fill: .blue,
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -34,7 +35,8 @@ class ImageGenerationTests: XCTestCase {
       stroke: (
         color: .blue,
         width: 1
-      )
+      ),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -45,7 +47,8 @@ class ImageGenerationTests: XCTestCase {
       stroke: (
         color: .blue,
         width: 0
-      )
+      ),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -56,7 +59,8 @@ class ImageGenerationTests: XCTestCase {
       stroke: (
         color: .blue,
         width: 10
-      )
+      ),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -64,7 +68,8 @@ class ImageGenerationTests: XCTestCase {
   func testRoundedImage() {
     let image = UIImage(
       fill: .blue,
-      rounding: .all(10)
+      rounding: .all(10),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -76,12 +81,12 @@ class ImageGenerationTests: XCTestCase {
         color: .red,
         width: 1
       ),
-      rounding: .all(10)
+      rounding: .all(10),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
-  
-  
+
   func testRoundedThickStrokedImage() {
     let image = UIImage(
       fill: .blue,
@@ -89,7 +94,8 @@ class ImageGenerationTests: XCTestCase {
         color: .red,
         width: 4
       ),
-      rounding: .all(10)
+      rounding: .all(10),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -104,7 +110,8 @@ class ImageGenerationTests: XCTestCase {
       rounding: .some(
         corners: [.bottomLeft, .topRight, .bottomRight],
         radii: 10
-      )
+      ),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -116,7 +123,8 @@ class ImageGenerationTests: XCTestCase {
       stops: (
         start: CGPoint(x: 0, y: 0),
         end: CGPoint(x: 1, y: 1)
-      )
+      ),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -125,7 +133,8 @@ class ImageGenerationTests: XCTestCase {
     let image = UIImage.gradientImage(
       colors: [.blue, .red],
       rounding: .all(10),
-      insets: .zero
+      insets: .zero,
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -137,7 +146,8 @@ class ImageGenerationTests: XCTestCase {
         corners: [.bottomLeft, .topRight, .bottomRight],
         radii: 10
       ),
-      insets: .zero
+      insets: .zero,
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -153,7 +163,8 @@ class ImageGenerationTests: XCTestCase {
       rounding: .some(
         corners: [.topLeft, .topRight],
         radii: 10
-      )
+      ),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -166,7 +177,8 @@ class ImageGenerationTests: XCTestCase {
         width: 2
       ),
       strokeEdges: [.left, .right],
-      rounding: .none
+      rounding: .none,
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -179,7 +191,8 @@ class ImageGenerationTests: XCTestCase {
         width: 4
       ),
       strokeEdges: [.left, .right, .bottom],
-      rounding: .some(corners: [.bottomLeft], radii: 10)
+      rounding: .some(corners: [.bottomLeft], radii: 10),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
@@ -192,7 +205,8 @@ class ImageGenerationTests: XCTestCase {
         width: 4
       ),
       strokeEdges: [.top, .left, .right],
-      rounding: .all(10)
+      rounding: .all(10),
+      traitCollection: .lightInterfaceStyle
     )!
     verifyImage(image)
   }
