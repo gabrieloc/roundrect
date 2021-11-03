@@ -145,18 +145,15 @@ extension CGFloat {
 }
 
 @available(iOS 13.0, *)
-extension UIView {
-  var lightInterfaceStyle: UITraitCollection {
-    traitCollection.withUserInterfaceStyle(.light)
-  }
-
-  var darkInterfaceStyle: UITraitCollection {
-    traitCollection.withUserInterfaceStyle(.dark)
-  }
-}
-
-@available(iOS 13.0, *)
 public extension UITraitCollection {
+  static var lightInterfaceStyle: UITraitCollection {
+    UITraitCollection.current.withUserInterfaceStyle(.light)
+  }
+
+  static var darkInterfaceStyle: UITraitCollection {
+    UITraitCollection.current.withUserInterfaceStyle(.dark)
+  }
+
   func withUserInterfaceStyle(_ style: UIUserInterfaceStyle) -> UITraitCollection {
     UITraitCollection(
       traitsFrom: [
