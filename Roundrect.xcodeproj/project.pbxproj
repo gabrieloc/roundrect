@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B25DF2BD27332DDF00ECD553 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = B25DF2BC27332DDF00ECD553 /* SnapshotTesting */; };
+		B25DF2BF2733309000ECD553 /* SnapshotUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25DF2BE2733309000ECD553 /* SnapshotUtility.swift */; };
 		OBJ_66 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* ButtonStyle.swift */; };
 		OBJ_67 /* ButtonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* ButtonTheme.swift */; };
 		OBJ_68 /* ImageGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* ImageGeneration.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B25DF2BE2733309000ECD553 /* SnapshotUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUtility.swift; sourceTree = "<group>"; };
 		B2DEA16623ECC69D00978959 /* Roundrect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Roundrect.h; sourceTree = "<group>"; };
 		OBJ_10 /* ButtonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTheme.swift; sourceTree = "<group>"; };
 		OBJ_11 /* ImageGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneration.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				OBJ_17 /* ImageGenerationTests.swift */,
 				OBJ_18 /* SampleSheet.swift */,
 				OBJ_19 /* SampleSheetTests.swift */,
+				B25DF2BE2733309000ECD553 /* SnapshotUtility.swift */,
 			);
 			name = RoundrectTests;
 			path = Tests/RoundrectTests;
@@ -339,6 +342,7 @@
 				OBJ_89 /* ImageGenerationTests.swift in Sources */,
 				OBJ_90 /* SampleSheet.swift in Sources */,
 				OBJ_91 /* SampleSheetTests.swift in Sources */,
+				B25DF2BF2733309000ECD553 /* SnapshotUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

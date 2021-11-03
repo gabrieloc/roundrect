@@ -21,10 +21,18 @@ class SampleSheetTests: XCTestCase {
     )
     let sampleSheet = SampleSheet(frame: canvas)
     sampleSheet.overrideUserInterfaceStyle = .light
-    assertSnapshot(matching: sampleSheet, as: .image, testName: #function + "-light")
+    assertSnapshot(
+      matching: sampleSheet,
+      as: .image,
+      testName: #function + "-light"
+    )
 
     sampleSheet.overrideUserInterfaceStyle = .dark
-    assertSnapshot(matching: sampleSheet, as: .image, testName: #function + "-dark")
+    assertSnapshot(
+      matching: sampleSheet,
+      as: .image,
+      testName: #function + "-dark"
+    )
   }
 
   @available(iOS 13.0, *)
@@ -39,6 +47,9 @@ class SampleSheetTests: XCTestCase {
     let themes = UIButton.Theme.allCases
     let sampleSheet = SampleSheet(frame: canvas, themes: themes)
     sampleSheet.overrideUserInterfaceStyle = .light
-    assertSnapshot(matching: sampleSheet, as: .image)
+    assertSnapshot(
+      matching: sampleSheet,
+      as: .image
+    )
   }
 }

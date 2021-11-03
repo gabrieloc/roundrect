@@ -6,9 +6,9 @@
 //  Copyright © 2019 gabrieloc. All rights reserved.
 //
 
+@testable import Roundrect
 import SnapshotTesting
 import XCTest
-@testable import Roundrect
 
 class ButtonStyleTests: XCTestCase {
   enum State: String, CaseIterable {

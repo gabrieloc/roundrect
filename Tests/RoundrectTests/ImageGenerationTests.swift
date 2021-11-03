@@ -6,9 +6,9 @@
 //  Copyright © 2019 gabrieloc. All rights reserved.
 //
 
+@testable import Roundrect
 import SnapshotTesting
 import XCTest
-@testable import Roundrect
 
 @available(iOS 13.0, *)
 class ImageGenerationTests: XCTestCase {
