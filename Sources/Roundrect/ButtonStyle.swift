@@ -39,7 +39,7 @@ public extension UIButton {
 
     var disabledColor: UIColor {
       if #available(iOS 13, *) {
-        return UIColor.quaternarySystemFill
+        return UIColor.tertiarySystemFill
       }
       return UIColor(white: 0.5, alpha: 0.5)
     }
